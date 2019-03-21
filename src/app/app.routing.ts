@@ -14,7 +14,7 @@ const appRoutes: Routes = [
 	{path: 'login', component: LoginComponent},
 	{path: 'inicio', component: InicioComponent, canActivate: [AdminGuard]},
 	{path: 'caja', component: CajaComponent, canActivate: [AdminGuard]},
-	{path: 'caja-editar/id_ticket', component: CajaEditarComponent, canActivate: [AdminGuard]},
+	{path: 'caja-editar/:id_ticket', component: CajaEditarComponent, canActivate: [AdminGuard]},
 	{path: '**', component: LoginComponent},
 ];
 

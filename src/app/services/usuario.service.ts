@@ -29,118 +29,83 @@ export class UsuarioService{
 		}
 		return this.token;
 	}
-	obtenerProducto(){
+	obtenerPedidos(){
 		let params = new HttpParams();
 		params = params.append('nuevo', 'nuevo');
 		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/obtenerProductos', params, {headers: headers});
+		return this._http.post(this.url+'/tickets/ticket/obtenerPedidos', params, {headers: headers});
 	}
-	registrarProducto(nombre,descripcion){
+	obtenerPedidosClientePagar(id_pedido){
 		let params = new HttpParams();
-		params = params.append('producto', nombre);
-		params = params.append('incluir', descripcion);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/registrarProducto', params, {headers: headers});	
+			params = params.append('id_pedido', id_pedido);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/tickets/ticket/obtenerPedidosClientePagar', params, {headers:headers});
 	}
-	activarProducto(id){
+	buscarPedidoNombre(nombre){
 		let params = new HttpParams();
-		params = params.append('producto', id);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/activarProducto', params, {headers: headers});	
+			params = params.append('buscar_nombre', nombre);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/tickets/ticket/buscarProductoPedidoNombre', params, {headers:headers});
 	}
-	desactivarProducto(id){
+	buscarPedidoCodigo(codigo){
 		let params = new HttpParams();
-		params = params.append('producto', id);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/desactivarProducto', params, {headers: headers});	
+			params = params.append('buscar_codigo', codigo);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/tickets/ticket/buscarProductoPedidoCodigo', params, {headers:headers});
 	}
-	buscarProductoNombre(nombre){
+	agregarPedido(producto_unidad_id,cantidad,representacion,precio,id_producto,ticket,id_producto_sucursal){
 		let params = new HttpParams();
-		params = params.append('nombre', nombre);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/buscarProductoNombre', params, {headers: headers});	
+			params = params.append('producto_unidad_id', producto_unidad_id);
+			params = params.append('id_producto', id_producto);
+			params = params.append('cantidad', cantidad);
+			params = params.append('representacion', representacion);
+			params = params.append('precio', precio);
+			params = params.append('ticket', ticket);
+			params = params.append('producto_sucursal', id_producto_sucursal);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/tickets/ticket/agregarPedido', params, {headers:headers});
 	}
-	buscarProductoCodigo(codigo){
+	eliminarPedidoTick(id_pedido){
 		let params = new HttpParams();
-		params = params.append('codigo', codigo);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/buscarProductoCodigo', params, {headers: headers});	
+			params = params.append('id_pedido', id_pedido);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/tickets/ticket/eliminarPedidosClientePagar', params, {headers:headers});
 	}
-	obtenerProductosEditar(id){
+	actualizarPedidoTick(id_pedido,cantidad,precio,representacion,producto_sucursal){
 		let params = new HttpParams();
-		params = params.append('id_nuevo', id);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/obtenerProductosEditar', params, {headers: headers});	
+			params = params.append('id_pedido', id_pedido);
+			params = params.append('cantidad', cantidad);
+			params = params.append('precio', precio);
+			params = params.append('representacion', representacion);
+			params = params.append('producto_sucursal', producto_sucursal);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/tickets/ticket/actualizarPedidosClientePagar', params, {headers:headers});
 	}
-	actualizarProductosEditar(id,nombre,barras,descripcion){
+	enviarActualizarIdCarrito(data){
 		let params = new HttpParams();
-		params = params.append('id', id);
-		params = params.append('nombre', nombre);
-		params = params.append('barras', barras);
-		params = params.append('descripcion', descripcion);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/actualizarProducto', params, {headers: headers});	
-	}
-	agregarSucursalesProductosEditar(stock,sucursal,id){
-		let params = new HttpParams();
-		params = params.append('id', id);
-		params = params.append('stock', stock);
-		params = params.append('sucursal', sucursal);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/agregarSucursalesProductosEditar', params, {headers: headers});	
-	}
-	actualizarSucursalesProductosEditar(stock,id){
-		let params = new HttpParams();
-		params = params.append('id', id);
-		params = params.append('stock', stock);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/actualizarSucursalesProductosEditar', params, {headers: headers});	
-	}
-	activarProductoSucursalEditar(id){
-		let params = new HttpParams();
-		params = params.append('producto', id);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/activarProductoSucursalEditar', params, {headers: headers});	
-	}
-	desactivarProductoSucursalEditar(id){
-		let params = new HttpParams();
-		params = params.append('producto', id);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/desactivarProductoSucursalEditar', params, {headers: headers});	
-	}
-	obtenerPreciosProductoSucursales(id){
-		let params = new HttpParams();
-		params = params.append('psi', id);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/obtenerPreciosProductoSucursales', params, {headers: headers});	
-	}
-	activarProductoSucursalEditarPrecio(id){
-		let params = new HttpParams();
-		params = params.append('producto_unidad', id);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/activarProductoUnidad', params, {headers: headers});	
-	}
-	desactivarProductoSucursalEditarPrecio(id){
-		let params = new HttpParams();
-		params = params.append('producto_unidad', id);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/desactivarProductoUnidad', params, {headers: headers});	
-	}
-	actualizarProductoSucursalEditarPrecio(precio,id){
-		let params = new HttpParams();
-		params = params.append('id', id);
-		params = params.append('precio', precio);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/actualizarProductoUnidad', params, {headers: headers});	
-	}
-	agregarSucursalesPrecioProductosEditar(producto_sucursal_id,unidad_agregar,precio,id_producto,sucursal_id){
-		let params = new HttpParams();
-		params = params.append('producto', id_producto);
-		params = params.append('precio', precio);
-		params = params.append('unidad', unidad_agregar);
-		params = params.append('sucursal', sucursal_id);
-		params = params.append('producto_sucursal', producto_sucursal_id);
-		let headers = new HttpHeaders({'Content-Type':'application/json','Authorization': this.getToken()});
-		return this._http.post(this.url+'/productos/producto/agregarProductoUnidad', params, {headers: headers});	
+			params = params.append('data', data);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/tickets/ticket/actualizarPedidosParaImprimir', params, {headers:headers});
 	}
 }

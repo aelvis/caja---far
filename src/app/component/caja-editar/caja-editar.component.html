@@ -1,3 +1,105 @@
-<p>
-  caja-editar works!
-</p>
+<nav-component></nav-component>
+<br>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6" style="display: flex;justify-content: center;">
+			<button class="btn btn-info btn-block font-weight-normal text-center" style="color: white;" (click)="mandarCaja()">VERIFICAR</button><br><br><br>
+		</div>
+		<div class="col-md-6" style="display: flex;justify-content: center;" *ngIf="imprimir == 1">
+			<button class="btn btn-danger btn-block font-weight-normal text-center" style="color: white;" (click)="mandarCaja()">IMPRIMIR</button><br><br><br>
+		</div>
+		<div class="col-md-12">
+		<br><br>
+		</div>
+		<div class="col-md-6">
+			<h1 class="h2 mb-3 font-weight-normal text-center" style="color: red"><u>Lista de Pedido</u>
+			S/. {{total?.total | number:'1.0'}}</h1>
+			<table class="table" *ngIf="introduccion == true">
+			  <thead class="thead-dark">
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Producto</th>
+			      <th scope="col">Unidad</th>
+			      <th scope="col">Cantidad</th>
+			      <th scope="col">Stock</th>
+			      <th scope="col">Pagar</th>
+			      <th scope="col">Eliminar</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr *ngFor="let pedi of pedido; index as i">
+			      <th scope="row">{{i+1}}</th>
+			      <td *ngIf="pedi.estado == 1" class="table-success">{{pedi.nombre_producto}} 1</td>
+			      <td *ngIf="pedi.estado == 2" class="table-danger">{{pedi.nombre_producto}} 2</td>
+			      <td>{{pedi.nombre_unidad}}</td>
+			      <td *ngIf="pedi.estado == 2"><input type="text" value="{{pedi.cantidad}}" class="form-control" #cantidad_actualizar placeholder="Cantidad" (keyup.enter)="actualizarPedidoAlCarrito(pedi.id,cantidad_actualizar.value,pedi.precio_producto, pedi.representacion, pedi.id_producto_sucursal)"></td>
+			      <td *ngIf="pedi.estado == 1">{{ pedi.cantidad}}</td>
+			      <td>{{ pedi.stock}}</td>
+			      <td>S/. {{ pedi.precio}}</td>
+			      <td *ngIf="pedi.estado == 2"><button class="btn btn-warning btn-block" (click)="eliminarPedidoCarritoCompras(pedi.id)">Eliminar</button></td>
+			      <td  *ngIf="pedi.estado == 1"><button class="btn btn-info btn-block" >Verificado</button></td>
+			    </tr>
+			  </tbody>
+			</table>
+
+			<button class="btn btn-info" type="button" *ngIf="introduccion == false">
+			  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+			  Cargando...
+			</button>
+		</div>
+		<div class="col-md-6">
+			<h1 class="h2 mb-3 font-weight-normal text-center" style="color: red"><u>Buscar Producto</u></h1>
+			<div class="row">
+				<div class="col-md-6">
+				  <div class="form-group">
+				    <label for="inputPassword2" class="sr-only">Nombre</label>
+				    <input type="text" class="form-control" #nombre_buscar placeholder="Nombre Producto" (keydown.enter)="buscarNombre(nombre_buscar.value)">
+				  </div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+					    <label for="inputPassword2" class="sr-only">Código</label>
+					    <input type="text" class="form-control" #codigo_buscar placeholder="Producto Código de Barras" (keydown.enter)="buscarCodigo(codigo_buscar.value)">
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+</div>
+<div class="modal fade" id="tabla_precios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+      	<div class="row">
+			<table class="table">
+			  <thead class="thead-dark">
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Nombre</th>
+			      <th scope="col">Precio</th>
+			      <th scope="col">Cantidad</th>
+			      <th scope="col">Unidad</th>
+			      <th scope="col">Representación</th>
+			      <th scope="col">Stock</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr *ngFor="let pedi_bus of pedido_buscado; index as i">
+			      <th scope="row">{{i+1}}</th>
+			      <td>{{pedi_bus.nombre}}</td>
+			      <td>S/. {{pedi_bus.precio}}</td>
+			      <td><input type="text" class="form-control" #cantidad_agregar placeholder="Cantidad" (keyup.enter)="agregarPedidoAlCarrito(pedi_bus.id_producto_unidad,cantidad_agregar.value, pedi_bus.representacion, pedi_bus.precio, pedi_bus.producto_id,pedi_bus.id_producto_sucursal)"></td>
+			      <td>{{pedi_bus.nombre_unidad}}</td>
+			      <td>{{pedi_bus.representacion}}</td>
+			      <td>{{pedi_bus.stock}}</td>
+			    </tr>
+			  </tbody>
+			</table>
+      	</div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-warning" (click)="cerrarModalPrecio()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
