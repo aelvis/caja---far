@@ -6,7 +6,7 @@
 			<button class="btn btn-info btn-block font-weight-normal text-center" style="color: white;" (click)="mandarCaja()">VERIFICAR</button><br><br><br>
 		</div>
 		<div class="col-md-6" style="display: flex;justify-content: center;" *ngIf="imprimir == 1">
-			<button class="btn btn-danger btn-block font-weight-normal text-center" style="color: white;" (click)="mandarCaja()">IMPRIMIR</button><br><br><br>
+			<button class="btn btn-danger btn-block font-weight-normal text-center" style="color: white;" (click)="imprimirFac()">IMPRIMIR</button><br><br><br>
 		</div>
 		<div class="col-md-12">
 		<br><br>
@@ -29,8 +29,8 @@
 			  <tbody>
 			    <tr *ngFor="let pedi of pedido; index as i">
 			      <th scope="row">{{i+1}}</th>
-			      <td *ngIf="pedi.estado == 1" class="table-success">{{pedi.nombre_producto}} 1</td>
-			      <td *ngIf="pedi.estado == 2" class="table-danger">{{pedi.nombre_producto}} 2</td>
+			      <td *ngIf="pedi.estado == 1" class="table-success">{{pedi.nombre_producto}}</td>
+			      <td *ngIf="pedi.estado == 2" class="table-danger">{{pedi.nombre_producto}}</td>
 			      <td>{{pedi.nombre_unidad}}</td>
 			      <td *ngIf="pedi.estado == 2"><input type="text" value="{{pedi.cantidad}}" class="form-control" #cantidad_actualizar placeholder="Cantidad" (keyup.enter)="actualizarPedidoAlCarrito(pedi.id,cantidad_actualizar.value,pedi.precio_producto, pedi.representacion, pedi.id_producto_sucursal)"></td>
 			      <td *ngIf="pedi.estado == 1">{{ pedi.cantidad}}</td>
@@ -48,6 +48,35 @@
 			</button>
 		</div>
 		<div class="col-md-6">
+			<h1 class="h2 mb-3 font-weight-normal text-center" style="color: red"><u>CLIENTE</u></h1>
+			<div class="row">
+				<div class="col-md-6">
+					<p>Documento: {{tipo_pago?.dni_ruc}}</p>
+				</div>
+				<div class="col-md-6">
+					<p>Nombre: {{tipo_pago?.nombre}}</p>
+				</div>
+				<div class="col-md-6">
+					<p>Dirección: {{tipo_pago?.direccion}}</p>
+				</div>
+			</div>
+			<h1 class="h2 mb-3 font-weight-normal text-center" style="color: red"><u>Tipo de Pago</u></h1>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+				  <div class="form-group">
+					  <div class="form-group">
+					  	<p class="h4 mb-3 font-weight-normal text-center"  style="color: green" *ngIf="imprimir == 1">{{tipo_pago?.tipo_pago}}</p>
+					  	<span *ngIf="imprimir != 1">Falta agregar el Tipo de Pago</span>
+					    <select  *ngIf="imprimir != 1" class="form-control" ngModel (ngModelChange)="agregarTipoPago($event)">
+					      <option value="Tarjeta">Tarjeta</option>
+					      <option value="Efectivo">Efectivo</option>
+					    </select>
+					  </div>
+				  </div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
 			<h1 class="h2 mb-3 font-weight-normal text-center" style="color: red"><u>Buscar Producto</u></h1>
 			<div class="row">
 				<div class="col-md-6">

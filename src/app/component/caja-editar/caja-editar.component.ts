@@ -15,6 +15,9 @@ export class CajaEditarComponent implements OnInit {
   public total:number;
   public imprimir:number;
   public obtener:any = [];
+  public nuevo_item:any = [];
+  public letrero;
+  public tipo_pago;
   constructor(private toastr: ToastrService,private _usu: UsuarioService, private _router: Router, private route: ActivatedRoute) { 
   	this.route.params.forEach(x => this.id_pedido = x['id_ticket']);
   }
@@ -38,6 +41,7 @@ export class CajaEditarComponent implements OnInit {
   					this.pedido = res["mensaje"].ped;
   					this.total = res["mensaje"].total;
   					this.imprimir = res["mensaje"].imprimir;
+  					this.tipo_pago = res["mensaje"].ticket;
   					this.introduccion = true;
   				}else{
   					this.showError("Alerta","No se Encuentran Productos");
@@ -179,10 +183,8 @@ export class CajaEditarComponent implements OnInit {
 	  			}else{
 	  				if(res["mensaje"].codigo == 'success'){
 	  					this.obtenerPedido();
-	  					console.log("success");
 	  				}else{
-	  					this.showError("Alerta",res["mensaje"].msg);
-	  					console.log("danger");
+	  					this.showError("Alerta", 'HAY PRODUCTOS QUE NO TIENEN STOCK');
 	  				}
 	  			}
 	  		},
@@ -191,4 +193,43 @@ export class CajaEditarComponent implements OnInit {
 	  		}
 	  	);
   }
+  imprimirFac(){
+	this._usu.imprimirFactura().subscribe(
+	  		res => {
+	  			if(res["mensaje"].terminar){
+					localStorage.clear();
+					this._router.navigate(['/login']);
+	  			}else{
+	  				if(res["mensaje"].success){
+	  					this.showSuccess("Alerta", res["mensaje"].success);
+	  				}else{
+	  					this.showError("Alerta", res["mensaje"].danger);
+	  				}
+	  			}
+	  		},
+	  		error => {
+	  			this.showError("Alerta","Error de Internet");
+	  		}
+	  	);
+  }
+  	agregarTipoPago(agregarTipoPago){
+	  	this._usu.actualizarTipoPago(this.id_pedido,agregarTipoPago).subscribe(
+		  		res => {
+		  			if(res["mensaje"].terminar){
+						localStorage.clear();
+						this._router.navigate(['/login']);
+		  			}else{
+		  				if(res["mensaje"].codigo == 'success'){
+		  					this.obtenerPedido();
+		  					this.showSuccess("Alerta", res["mensaje"].msg);
+		  				}else{
+		  					this.showError("Alerta", res["mensaje"].msg);
+		  				}
+		  			}
+		  		},
+		  		error => {
+		  			this.showError("Alerta","Error de Internet");
+		  		}
+		  	);
+  	}
 }

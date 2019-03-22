@@ -108,4 +108,23 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/tickets/ticket/actualizarPedidosParaImprimir', params, {headers:headers});
 	}
+	imprimirFactura(){
+		let params = new HttpParams();
+			params = params.append('data', 'nuevo');
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/tickets/ticket/imprimir', params, {headers:headers});
+	}
+	actualizarTipoPago(id_ticket,tipo_pago){
+		let params = new HttpParams();
+			params = params.append('id_ticket', id_ticket);
+			params = params.append('tipo_pago', tipo_pago);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/tickets/ticket/actualizarTipoPago', params, {headers:headers});
+	}
 }
