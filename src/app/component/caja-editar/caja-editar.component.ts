@@ -221,6 +221,8 @@ export class CajaEditarComponent implements OnInit {
 						this._router.navigate(['/login']);
 		  			}else{
 		  				if(res["mensaje"].codigo == 'success'){
+                this.imprimir = 0;
+                this.tipo_pago = "";
 		  					this.obtenerPedido();
 		  					this.showSuccess("Alerta", res["mensaje"].msg);
 		  				}else{
