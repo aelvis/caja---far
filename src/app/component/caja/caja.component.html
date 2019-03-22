@@ -1,15 +1,26 @@
 <nav-component></nav-component>
 <br>
-<div class="container-fluid">
+<div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h1 class="h3 mb-3 font-weight-normal text-center" style="color: red">BIENVENIDOS A CAJA</h1>
-		</div>
-		<div class="col-md-12"><br></div>
-		<div *ngFor="let up of ticket" class="col-md-3">
-			<p style="background: #17a2b8; color: white; padding: 15px" class="text-center" [routerLink]="['/caja-editar', up.id]">
-			  {{up.numero}}<br> <span class="badge badge-light">{{up.date}}</span>
-			</p>
+			<table class="table">
+			  <thead class="thead-dark">
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Tipo Documento</th>
+			      <th scope="col">Nombre</th>
+			      <th scope="col">Total</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr *ngFor="let up of ticket; index as i">
+			      <th scope="row">{{i+1}}</th>
+			      <td [routerLink]="['/caja-editar', up.id]">{{up.dni_ruc}}</td>
+			      <td>{{up.nombre}}</td>
+			      <td>S/. {{up.total| number:'1.0'}}</td>
+			    </tr>
+			  </tbody>
+			</table>
 		</div>
 	</div>
 </div>
