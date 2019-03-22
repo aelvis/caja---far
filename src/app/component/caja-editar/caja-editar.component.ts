@@ -183,6 +183,7 @@ export class CajaEditarComponent implements OnInit {
 	  			}else{
 	  				if(res["mensaje"].codigo == 'success'){
 	  					this.obtenerPedido();
+              this.showSuccess("Alerta", 'ACTUALIZADO CORRECTO');
 	  				}else{
 	  					this.showError("Alerta", 'HAY PRODUCTOS QUE NO TIENEN STOCK');
 	  				}
