@@ -108,9 +108,10 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/tickets/ticket/actualizarPedidosParaImprimir', params, {headers:headers});
 	}
-	imprimirFactura(){
+	imprimirFactura(serie,id_ticket){
 		let params = new HttpParams();
-			params = params.append('data', 'nuevo');
+			params = params.append('serie', serie);
+			params = params.append('id_ticket', id_ticket);
 		let headers = new HttpHeaders({
 			'Content-Type':'application/json',
 			'Authorization': this.getToken()

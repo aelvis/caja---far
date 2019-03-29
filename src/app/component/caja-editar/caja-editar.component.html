@@ -1,16 +1,27 @@
 <nav-component></nav-component>
 <br>
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<h3 class="text-center" *ngIf="boleta_factura == 'b'">BOLETA {{numero_boleta_factura+1}}</h3><br>
-			<h3 class="text-center" *ngIf="boleta_factura == 'f'">FACTURA {{numero_boleta_factura+1}}</h3><br>
+	<div class="row" *ngIf="inicio == false">
+		<div class="loader" id="loader">Loading...</div>
+	</div>
+	<div class="row" *ngIf="inicio == true">
+		<div class="col-md-12" *ngIf="tipo_pago?.estado_id == 3">
+			<h3 class="text-center" *ngIf="boleta_factura == 'b'">GENERAR BOLETA B{{numero_boleta_factura+1}}</h3><br>
+			<h3 class="text-center" *ngIf="boleta_factura == 'f'">GENERAR FACTURA F{{numero_boleta_factura+1}}</h3><br>
 		</div>
-		<div class="col-md-6" style="display: flex;justify-content: center;">
+		<div class="col-md-12" *ngIf="tipo_pago?.estado_id == 1">
+			<h3 class="text-center">{{tipo_pago?.serie}}</h3><br>
+		</div>
+		<div class="col-md-6" style="display: flex;justify-content: center;"  *ngIf="tipo_pago?.estado_id == 3">
 			<button class="btn btn-info btn-block font-weight-normal text-center" style="color: white;" (click)="mandarCaja()">VERIFICAR</button><br><br><br>
 		</div>
-		<div class="col-md-6" style="display: flex;justify-content: center;" *ngIf="imprimir == 1">
-			<button class="btn btn-danger btn-block font-weight-normal text-center" style="color: white;" (click)="imprimirFac()">GENERAR</button><br><br><br>
+		<div class="col-md-6" style="display: flex;justify-content: center;" *ngIf="imprimir == 1 && tipo_pago?.estado_id == 3 && boleta_factura == 'b'">
+			<input type="hidden" #obtenerBoleta value="B{{numero_boleta_factura+1}}">
+			<button class="btn btn-danger btn-block font-weight-normal text-center" style="color: white;" (click)="imprimirFac(obtenerBoleta.value)">GENERAR</button><br><br><br>
+		</div>
+		<div class="col-md-6" style="display: flex;justify-content: center;" *ngIf="imprimir == 1 && tipo_pago?.estado_id == 3 && boleta_factura == 'f'">
+			<input type="hidden" #obtenerFactura value="F{{numero_boleta_factura+1}}">
+			<button class="btn btn-danger btn-block font-weight-normal text-center" style="color: white;" (click)="imprimirFac(obtenerFactura.value)">GENERAR</button><br><br><br>
 		</div>
 		<div class="col-md-12">
 		<br><br>
@@ -18,7 +29,7 @@
 		<div class="col-md-6">
 			<h1 class="h2 mb-3 font-weight-normal text-center" style="color: red"><u>Lista de Pedido</u>
 			S/. {{total?.total | number:'1.0'}}</h1>
-			<table class="table" *ngIf="introduccion == true">
+			<table class="table"  *ngIf="introduccion == true">
 			  <thead class="thead-dark">
 			    <tr>
 			      <th scope="col">#</th>
@@ -45,11 +56,9 @@
 			    </tr>
 			  </tbody>
 			</table>
-
-			<button class="btn btn-info" type="button" *ngIf="introduccion == false">
-			  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-			  Cargando...
-			</button>
+			<div *ngIf="introduccion == false">
+				<div class="loader" id="loader">Loading...</div>
+			</div>
 		</div>
 		<div class="col-md-6">
 			<h1 class="h2 mb-3 font-weight-normal text-center" style="color: red"><u>CLIENTE</u></h1>
@@ -64,25 +73,29 @@
 					<p>Dirección: {{tipo_pago?.direccion}}</p>
 				</div>
 			</div>
-			<h1 class="h2 mb-3 font-weight-normal text-center" style="color: red"><u>Tipo de Pago</u></h1>
-			<div class="row">
+			<h1 class="h2 mb-3 font-weight-normal text-center" style="color: red"  *ngIf="tipo_pago?.estado_id == 3"><u>Tipo de Pago</u></h1>
+			<div class="row"  *ngIf="tipo_pago?.estado_id == 3 && tipo_pago_cargar == true">
 				<div class="col-md-4"></div>
 				<div class="col-md-4">
 				  <div class="form-group">
 					  <div class="form-group">
-					  	<p class="h4 mb-3 font-weight-normal text-center"  style="color: green" *ngIf="imprimir == 1">{{tipo_pago?.tipo_pago}}</p>
-					  	<span *ngIf="imprimir != 1">Falta agregar el Tipo de Pago</span>
-					    <select  *ngIf="imprimir != 1" class="form-control" ngModel (ngModelChange)="agregarTipoPago($event)">
+					  	<p class="h4 mb-3 font-weight-normal text-center"  style="color: green" *ngIf="tipo_pago.tipo_pago">{{tipo_pago?.tipo_pago}}</p>
+					  	<span *ngIf="!tipo_pago.tipo_pago">Falta agregar el Tipo de Pago</span>
+					    <select  *ngIf="!tipo_pago.tipo_pago" class="form-control" ngModel (ngModelChange)="agregarTipoPago($event)">
 					      <option value="Tarjeta">Tarjeta</option>
 					      <option value="Efectivo">Efectivo</option>
 					    </select>
 					  </div>
 				  </div>
+
 				</div>
 				<div class="col-md-4"></div>
 			</div>
-			<h1 class="h2 mb-3 font-weight-normal text-center" style="color: red"><u>Buscar Producto</u></h1>
-			<div class="row">
+			<div class="row" *ngIf="tipo_pago_cargar == false">
+				<div class="loader" id="loader">Loading...</div>
+			</div>
+			<h1 class="h2 mb-3 font-weight-normal text-center" style="color: red"  *ngIf="tipo_pago?.estado_id == 3"><u>Buscar Producto</u></h1>
+			<div class="row"  *ngIf="tipo_pago?.estado_id == 3">
 				<div class="col-md-6">
 				  <div class="form-group">
 				    <label for="inputPassword2" class="sr-only">Nombre</label>
@@ -103,7 +116,7 @@
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-body">
-      	<div class="row">
+      	<div class="row" *ngIf="cargar_modal_producto == true">
 			<table class="table">
 			  <thead class="thead-dark">
 			    <tr>
@@ -129,6 +142,9 @@
 			  </tbody>
 			</table>
       	</div>
+      	<div class="row" *ngIf="cargar_modal_producto == false">
+				<div class="loader" id="loader">Loading...</div>
+			</div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-warning" (click)="cerrarModalPrecio()">Cerrar</button>
