@@ -1,7 +1,7 @@
 <nav-component></nav-component>
 <br>
 <div class="container">
-	<div class="row">
+	<div class="row" *ngIf="inicio == true">
 		<div class="col-md-12">
 			<table class="table">
 			  <thead class="thead-dark">
@@ -23,4 +23,5 @@
 			</table>
 		</div>
 	</div>
+	<div class="row" *ngIf="inicio == false"><div class="loader" id="loader">Loading...</div></div>
 </div>

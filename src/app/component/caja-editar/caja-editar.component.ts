@@ -18,6 +18,8 @@ export class CajaEditarComponent implements OnInit {
   public nuevo_item:any = [];
   public letrero;
   public tipo_pago;
+  public boleta_factura;
+  public numero_boleta_factura;
   constructor(private toastr: ToastrService,private _usu: UsuarioService, private _router: Router, private route: ActivatedRoute) { 
   	this.route.params.forEach(x => this.id_pedido = x['id_ticket']);
   }
@@ -42,6 +44,8 @@ export class CajaEditarComponent implements OnInit {
   					this.total = res["mensaje"].total;
   					this.imprimir = res["mensaje"].imprimir;
   					this.tipo_pago = res["mensaje"].ticket;
+            this.boleta_factura = res["mensaje"].boleta_factura;
+            this.numero_boleta_factura = res["mensaje"].numero_boleta_factura;
   					this.introduccion = true;
   				}else{
   					this.showError("Alerta","No se Encuentran Productos");
@@ -186,6 +190,7 @@ export class CajaEditarComponent implements OnInit {
               this.showSuccess("Alerta", 'ACTUALIZADO CORRECTO');
 	  				}else{
 	  					this.showError("Alerta", 'HAY PRODUCTOS QUE NO TIENEN STOCK');
+              this.obtenerPedido();
 	  				}
 	  			}
 	  		},

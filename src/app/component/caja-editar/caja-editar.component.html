@@ -2,11 +2,15 @@
 <br>
 <div class="container-fluid">
 	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-center" *ngIf="boleta_factura == 'b'">BOLETA {{numero_boleta_factura+1}}</h3><br>
+			<h3 class="text-center" *ngIf="boleta_factura == 'f'">FACTURA {{numero_boleta_factura+1}}</h3><br>
+		</div>
 		<div class="col-md-6" style="display: flex;justify-content: center;">
 			<button class="btn btn-info btn-block font-weight-normal text-center" style="color: white;" (click)="mandarCaja()">VERIFICAR</button><br><br><br>
 		</div>
 		<div class="col-md-6" style="display: flex;justify-content: center;" *ngIf="imprimir == 1">
-			<button class="btn btn-danger btn-block font-weight-normal text-center" style="color: white;" (click)="imprimirFac()">IMPRIMIR</button><br><br><br>
+			<button class="btn btn-danger btn-block font-weight-normal text-center" style="color: white;" (click)="imprimirFac()">GENERAR</button><br><br><br>
 		</div>
 		<div class="col-md-12">
 		<br><br>
