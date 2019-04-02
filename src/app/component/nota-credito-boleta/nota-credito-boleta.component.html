@@ -5,31 +5,160 @@
 		<table class="table">
 		  <tbody>
 		    <tr>
-		      <th scope="col"  class="table-info" colspan="3"><div class="text-center">Emisión Noas de Crédito Electrónicas</div></th>
+		      <th scope="col"  class="table-info" colspan="3"><div class="text-center">Emisión Notas de Crédito Electrónicas - BOLETA</div></th>
 		    </tr>
 		    <tr>
 		      <th scope="row">Tipo de Nota de Crédito</th>
 		      <td>:</td>
-		      <td><div class="form-group">
-			    <select class="form-control" id="exampleFormControlSelect1">
-			      <option>1</option>
-			      <option>2</option>
-			      <option>3</option>
-			      <option>4</option>
-			      <option>5</option>
-			    </select>
-			  </div></td>
+		      <td>
+			    	<button  class="btn btn-primary" style="margin:2px 2px" (click)="anulacionOperacion()">Anulación de la Operación <span class="badge badge-light">1</span></button>
+			    	<button  class="btn btn-primary" style="margin:2px 2px" (click)="anulacionErrorRuc()">Anulación por Error en el Ruc <span class="badge badge-light">2</span></button>
+			    	<button  class="btn btn-primary" style="margin:2px 2px" (click)="descuentoGlobal()">Descuento Total <span class="badge badge-light">3</span></button>
+			    	<button  class="btn btn-primary" style="margin:2px 2px" (click)="devolucionTotal()">Devolución Total <span class="badge badge-light">4</span></button>
+			      	<button  class="btn btn-primary" style="margin:2px 2px" (click)="correcionErrorDescripcion()">Corrección por error en la Descripción <span class="badge badge-light">5</span></button>
+			      	<button  class="btn btn-primary" style="margin:2px 2px" (click)="devolucionItem()">Devolución por item <span class="badge badge-light">6</span></button>
+			      	<button  class="btn btn-primary" style="margin:2px 2px" (click)="descuentoItem()">Descuento por Item <span class="badge badge-light">7</span></button>
+			 </td>
 		    </tr>
-		    <tr>
-		      <th scope="row">Número de FE respecto de la cual se emite la Nota de Crédito</th>
+		    <tr *ngIf="anulacion_operacion == true">
+		      <th scope="row">Número de BE respecto de la cual se emite la Nota de Crédito</th>
+		      <td>E001</td>
+		      <td><input type="text" class="form-control" [(ngModel)]="buscar_anulacion_operacion" (keydown.enter)="buscarAnulacionOperactionRuc()"></td>
+		    </tr>
+		    <tr *ngIf="anulacion_operacion_dos == true">
+		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
+		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+		    </tr>
+
+
+
+		    <tr *ngIf="anulacion_error_ruc == true">
+		    	<td>Número de BE respecto de la cual se emite la Nota de Crédito</td>
+		    	<td>E001</td>
+		    	<td colspan="2"><input type="text" class="form-control"></td>
+		    </tr>
+		    <tr *ngIf="anulacion_error_ruc == true">
+		    	<td>Número de la Nueva Factura Electrónica</td>
+		    	<td>E001</td>
+		    	<td colspan="2"><input type="text" class="form-control"></td>
+		    </tr>
+
+
+
+
+		    <tr *ngIf="descuento_global == true">
+		      <th scope="row">Número de BE respecto de la cual se emite la Nota de Crédito</th>
 		      <td>E001</td>
 		      <td><input type="text" class="form-control"></td>
 		    </tr>
-		    <tr>
+		    <tr *ngIf="descuento_global == true">
 		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
-		    	<td colspan="2"><textarea name="" id="" cols="30" rows="10" class="form-control"></textarea></td>
+		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
 		    </tr>
+		    <tr *ngIf="descuento_global == true">
+		    	<td>Descuento Global</td>
+		    	<td>:</td>
+		    	<td><input type="text" class="form-control"></td>
+		    </tr>
+		    <tr *ngIf="descuento_global == true">
+		    	<td>ISC</td>
+		    	<td>:</td>
+		    	<td><input type="text" class="form-control"></td>
+		    </tr>
+		    <tr *ngIf="descuento_global == true">
+		    	<td>IGV</td>
+		    	<td>:</td>
+		    	<td><input type="text" class="form-control"></td>
+		    </tr>
+
+
+		    <tr *ngIf="devolucion_total == true">
+		      <th scope="row">Número de BE respecto de la cual se emite la Nota de Crédito</th>
+		      <td>E001</td>
+		      <td><input type="text" class="form-control"></td>
+		    </tr>
+		    <tr *ngIf="devolucion_total == true">
+		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
+		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+		    </tr>
+
+
+			 <tr *ngIf="correcion_error_descripcion == true">
+		      <th scope="row">Número de BE respecto de la cual se emite la Nota de Crédito</th>
+		      <td>E001</td>
+		      <td><input type="text" class="form-control"></td>
+		    </tr>
+			<tr *ngIf="correcion_error_descripcion == true">
+		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
+		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+		    </tr>
+
+
+			 <tr *ngIf="devolucion_item == true">
+		      <th scope="row">Número de BE respecto de la cual se emite la Nota de Crédito</th>
+		      <td>E001</td>
+		      <td><input type="text" class="form-control"></td>
+		    </tr>
+			<tr *ngIf="devolucion_item == true">
+		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
+		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+		    </tr>
+
+
+			 <tr *ngIf="descuento_item == true">
+		      <th scope="row">Número de BE respecto de la cual se emite la Nota de Crédito</th>
+		      <td>E001</td>
+		      <td><input type="text" class="form-control"></td>
+		    </tr>
+			<tr *ngIf="descuento_item == true">
+		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
+		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+		    </tr>
+
 		  </tbody>
 		</table>
 	</div>
+</div>
+
+
+<div class="modal fade" id="anulacionOperaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Productos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+			<table class="table">
+			  <thead class="thead-dark">
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Nombre</th>
+			      <th scope="col">Precio</th>
+			      <th scope="col">Cantidad</th>
+			      <th scope="col">Unidad</th>
+			      <th scope="col">Representación</th>
+			      <th scope="col">Stock</th>
+			      <th scope="col">Anular</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr *ngFor="let pedi_bus of pedido_anulacion_operacion; index as i">
+			      <th scope="row">{{i+1}}</th>
+			      <td>{{pedi_bus.nombre_producto}}</td>
+			      <td>S/. {{pedi_bus.precio}}</td>
+			      <td>{{pedi_bus.cantidad}}</td>
+			      <td>{{pedi_bus.nombre_unidad}}</td>
+			      <td>{{pedi_bus.representacion}}</td>
+			      <td>{{pedi_bus.stock}}</td>
+			      <td *ngIf="pedi_bus.estado == '1'"><button class="btn btn-danger">Anular</button></td>
+			      <td *ngIf="pedi_bus.estado == '4'">Anulado</td>
+			    </tr>
+			  </tbody>
+			</table>
+      </div>
+    </div>
+  </div>
 </div>

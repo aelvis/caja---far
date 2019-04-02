@@ -128,4 +128,22 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/tickets/ticket/actualizarTipoPago', params, {headers:headers});
 	}
+	buscarAnulacionOperacionService(serie){
+		let params = new HttpParams();
+			params = params.append('serie', serie);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/credito/buscarAnulacionOperaciones', params, {headers:headers});
+	}
+	anularItemOperacionService(codex){
+		let params = new HttpParams();
+			params = params.append('codex', codex);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/credito/anularItemOperacion', params, {headers:headers});
+	}
 }
