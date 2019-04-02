@@ -5,7 +5,8 @@ import { InicioComponent} from './component/inicio/inicio.component';
 import { LoginComponent} from './component/login/login.component';
 import { CajaComponent } from './component/caja/caja.component';
 import { CajaEditarComponent } from './component/caja-editar/caja-editar.component';
-
+import { NotaCreditoBoletaComponent } from './component/nota-credito-boleta/nota-credito-boleta.component';
+import { NotaCreditoFacturaComponent } from './component/nota-credito-factura/nota-credito-factura.component';
 import { AdminGuard } from './services/admin.guard';
 
 const appRoutes: Routes = [
@@ -15,6 +16,8 @@ const appRoutes: Routes = [
 	{path: 'inicio', component: InicioComponent, canActivate: [AdminGuard]},
 	{path: 'caja', component: CajaComponent, canActivate: [AdminGuard]},
 	{path: 'caja-editar/:id_ticket', component: CajaEditarComponent, canActivate: [AdminGuard]},
+	{path: 'nota-credito-boleta', component: NotaCreditoBoletaComponent, canActivate: [AdminGuard]},
+	{path: 'nota-credito-factura', component: NotaCreditoFacturaComponent, canActivate: [AdminGuard]},
 	{path: '**', component: LoginComponent},
 ];
 

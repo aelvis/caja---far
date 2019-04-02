@@ -17,6 +17,8 @@ import { InicioComponent} from './component/inicio/inicio.component';
 import { NavAdminComponent} from './component/partial/partial.component';
 import { CajaComponent } from './component/caja/caja.component';
 import { CajaEditarComponent } from './component/caja-editar/caja-editar.component';
+import { NotaCreditoBoletaComponent } from './component/nota-credito-boleta/nota-credito-boleta.component';
+import { NotaCreditoFacturaComponent } from './component/nota-credito-factura/nota-credito-factura.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,9 @@ import { CajaEditarComponent } from './component/caja-editar/caja-editar.compone
     InicioComponent,
     NavAdminComponent,
     CajaComponent,
-    CajaEditarComponent
+    CajaEditarComponent,
+    NotaCreditoBoletaComponent,
+    NotaCreditoFacturaComponent
   ],
   imports: [
     BrowserModule,
