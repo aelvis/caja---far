@@ -76,7 +76,7 @@ export class NotaCreditoBoletaComponent implements OnInit {
 	  	);
   }
   anularItemOperacion(codex){
-	this._usu.buscarAnulacionOperacionService(codex).subscribe(
+	this._usu.anularItemOperacionService(codex).subscribe(
 	  	res => {
 	  		if(res["mensaje"].terminar){
 					localStorage.clear();

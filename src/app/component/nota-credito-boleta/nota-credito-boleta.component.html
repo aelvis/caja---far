@@ -153,7 +153,7 @@
 			      <td>{{pedi_bus.nombre_unidad}}</td>
 			      <td>{{pedi_bus.representacion}}</td>
 			      <td>{{pedi_bus.stock}}</td>
-			      <td *ngIf="pedi_bus.estado == '1'"><button class="btn btn-danger">Anular</button></td>
+			      <td *ngIf="pedi_bus.estado == '1'"><button class="btn btn-danger" (click)="anularItemOperacion(pedi_bus.id)">Anular</button></td>
 			      <td *ngIf="pedi_bus.estado == '4'">Anulado</td>
 			    </tr>
 			  </tbody>
