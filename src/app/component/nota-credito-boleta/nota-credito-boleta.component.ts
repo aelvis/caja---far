@@ -19,6 +19,7 @@ export class NotaCreditoBoletaComponent implements OnInit {
   public ticket_anulacion_operacion;
   public pedido_anulacion_operacion;
   public buscar_anulacion_operacion;
+  public reiniciar_ticket;
   constructor(private toastr: ToastrService,private _usu: UsuarioService, private _router: Router, private route: ActivatedRoute) { 
   this.anulacion_operacion = false;
   this.anulacion_operacion_dos = false;
@@ -63,6 +64,7 @@ export class NotaCreditoBoletaComponent implements OnInit {
 	  			}else{
 	  				if(res["mensaje"].ticket){
 	  					$("#anulacionOperaciones").modal("show");
+	  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
 	  					this.ticket_anulacion_operacion = res["mensaje"].ticket;
 	  					this.pedido_anulacion_operacion = res["mensaje"].pedido;
 	  				}else{
@@ -89,7 +91,9 @@ export class NotaCreditoBoletaComponent implements OnInit {
 									localStorage.clear();
 									this._router.navigate(['/login']);
 					  			}else{
-					  				if(res["mensaje"].ticket){
+					  				if(res["mensaje"].reiniciar_ticket){
+					  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
+					  					console.log(this.reiniciar_ticket);
 					  					this.pedido_anulacion_operacion = res["mensaje"].pedido;
 					  				}else{
 					  					this.showError("Alerta","No se Encuentra La Boleta");
