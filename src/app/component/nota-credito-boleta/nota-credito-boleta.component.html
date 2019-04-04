@@ -9,8 +9,7 @@
 		    </tr>
 		    <tr>
 		      <th scope="row">Tipo de Nota de Crédito</th>
-		      <td>:</td>
-		      <td>
+		      <td colspan="2">
 			    	<button  class="btn btn-primary" style="margin:2px 2px" (click)="anulacionOperacion()">Anulación de la Operación <span class="badge badge-light">1</span></button>
 			    	<button  class="btn btn-primary" style="margin:2px 2px" (click)="anulacionErrorRuc()">Anulación por Error en el Ruc <span class="badge badge-light">2</span></button>
 			    	<button  class="btn btn-primary" style="margin:2px 2px" (click)="descuentoGlobal()">Descuento Total <span class="badge badge-light">3</span></button>
@@ -22,12 +21,16 @@
 		    </tr>
 		    <tr *ngIf="anulacion_operacion == true">
 		      <th scope="row">Número de BE respecto de la cual se emite la Nota de Crédito</th>
-		      <td>E001</td>
-		      <td><input type="text" class="form-control" [(ngModel)]="buscar_anulacion_operacion" (keydown.enter)="buscarAnulacionOperactionRuc()"></td>
+		      <td><input type="text" class="form-control" #verificar_dos_nuevo [(ngModel)]="buscar_anulacion_operacion" (keydown.enter)="buscarAnulacionOperactionRuc()"></td>
+		      <td><button class="btn btn-warning" (click)="verificarAnulacionOperacionDos(verificar_dos_nuevo.value)">Verificar</button></td>
 		    </tr>
 		    <tr *ngIf="anulacion_operacion_dos == true">
 		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
 		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+		    </tr>
+		    <tr *ngIf="anulacion_operacion_dos == true">
+		    	<td colspan="2"><button class="btn btn-danger">Guardar</button></td>
+		    	<td><button class="btn btn-success" *ngIf="imprimir_anulacion_operacion_dos == true">Imprimir</button></td>
 		    </tr>
 
 
@@ -158,7 +161,8 @@
 			    </tr>
 			  </tbody>
 			</table>
-			<div *ngIf="reiniciar_ticket == 1">Actualizar Ticket </div>
+			<div *ngIf="ticket_anulacion_operacion?.estado_id == 1"><button class="btn btn-success" (click)="desactualizarTicket()">Actualizar Ticket</button></div>
+			<div *ngIf="ticket_anulacion_operacion?.estado_id == 4"><button class="btn btn-success">Ticket Desactivado</button></div>
       </div>
     </div>
   </div>

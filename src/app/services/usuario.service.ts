@@ -146,4 +146,22 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/anularItemOperacion', params, {headers:headers});
 	}
+	anularItemOperacionTicketService(codex){
+		let params = new HttpParams();
+			params = params.append('codex', codex);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/credito/anularItemOperacionTicket', params, {headers:headers});
+	}
+	validarOperacionTicketService(codex){
+		let params = new HttpParams();
+			params = params.append('codex', codex);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/credito/validarOperacionTicket', params, {headers:headers});
+	}
 }
