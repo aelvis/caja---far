@@ -19,6 +19,11 @@ import { CajaComponent } from './component/caja/caja.component';
 import { CajaEditarComponent } from './component/caja-editar/caja-editar.component';
 import { NotaCreditoBoletaComponent } from './component/nota-credito-boleta/nota-credito-boleta.component';
 import { NotaCreditoFacturaComponent } from './component/nota-credito-factura/nota-credito-factura.component';
+import { AnuluacionOperacionComponent } from './component/boleta/anuluacion-operacion/anuluacion-operacion.component';
+import { AnuluacionErrorRucComponent } from './component/boleta/anuluacion-error-ruc/anuluacion-error-ruc.component';
+import { DevolucionTotalComponent } from './component/boleta/devolucion-total/devolucion-total.component';
+import { CorrecionDescripcionComponent } from './component/boleta/correcion-descripcion/correcion-descripcion.component';
+import { DevolucionItemComponent } from './component/boleta/devolucion-item/devolucion-item.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +33,12 @@ import { NotaCreditoFacturaComponent } from './component/nota-credito-factura/no
     CajaComponent,
     CajaEditarComponent,
     NotaCreditoBoletaComponent,
-    NotaCreditoFacturaComponent
+    NotaCreditoFacturaComponent,
+    AnuluacionOperacionComponent,
+    AnuluacionErrorRucComponent,
+    DevolucionTotalComponent,
+    CorrecionDescripcionComponent,
+    DevolucionItemComponent
   ],
   imports: [
     BrowserModule,
