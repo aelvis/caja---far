@@ -188,4 +188,15 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/guardarAnulacionOperacioneBdErrorRuc', params, {headers:headers});
 	}
+	guardarAnulacionOperacioneBdServiceDevolucionTotak(ultima_boleta,descripcion_operacion_anulacion,buscar_anulacion_operacion){
+		let params = new HttpParams();
+			params = params.append('serie', ultima_boleta);
+			params = params.append('descripcion', descripcion_operacion_anulacion);
+			params = params.append('serie_ticket_cliente', buscar_anulacion_operacion);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/credito/guardarAnulacionOperacioneBdDevolucionTotal', params, {headers:headers});
+	}
 }

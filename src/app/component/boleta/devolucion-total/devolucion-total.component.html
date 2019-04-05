@@ -8,9 +8,13 @@
 				      <td><input type="text" class="form-control" #verificar_dos_nuevo [(ngModel)]="buscar_anulacion_operacion" (keydown.enter)="buscarAnulacionOperactionRuc()"></td>
 				      <td><button class="btn btn-warning" (click)="verificarAnulacionOperacionDos(verificar_dos_nuevo.value)">Verificar</button></td>
 				    </tr>
-				    <tr *ngIf="devolucion_total == true">
+				    <tr *ngIf="devolucion_total_dos == true">
 				    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
-				    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+				    	<td colspan="2"><textarea cols="30" rows="2" class="form-control" [(ngModel)]="descripcion_operacion_anulacion"></textarea></td>
+				    </tr>
+				    <tr>
+				    	<td colspan="2"  *ngIf="devolucion_total_dos == true"><button class="btn btn-danger" (click)="guardarAnulacionOperacioneBdController()">Guardar</button></td>
+				    	<td *ngIf="imprimir_anulacion_error_ruc == true"><button class="btn btn-success">Imprimir</button></td>
 				    </tr>
 				</tbody>
 			</table>
