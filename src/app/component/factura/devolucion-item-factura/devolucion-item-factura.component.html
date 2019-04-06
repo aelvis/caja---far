@@ -1,3 +1,18 @@
-<p>
-  devolucion-item-factura works!
-</p>
+<div class="container">
+	<div class="col-md-12">
+		<table class="table">
+		  <tbody>
+			 <tr>
+		      <th scope="row">Número de FE respecto de la cual se emite la Nota de Crédito</th>
+		      <td>E001</td>
+		      <td><input type="text" class="form-control"></td>
+		    </tr>
+			<tr *ngIf="devolucion_item == true">
+		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
+		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+		    </tr>
+
+		  </tbody>
+		</table>
+	</div>
+</div>

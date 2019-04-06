@@ -24,13 +24,13 @@ import { AnuluacionErrorRucComponent } from './component/boleta/anuluacion-error
 import { DevolucionTotalComponent } from './component/boleta/devolucion-total/devolucion-total.component';
 import { CorrecionDescripcionComponent } from './component/boleta/correcion-descripcion/correcion-descripcion.component';
 import { DevolucionItemComponent } from './component/boleta/devolucion-item/devolucion-item.component';
-import { AnulacionOperacionFacturaComponent } from './anulacion-operacion-factura/anulacion-operacion-factura.component';
-import { AnulacionErrorRucFacturaComponent } from './anulacion-error-ruc-factura/anulacion-error-ruc-factura.component';
-import { DescuentoTotalFacturaComponent } from './descuento-total-factura/descuento-total-factura.component';
-import { DevolucionTotalFacturaComponent } from './devolucion-total-factura/devolucion-total-factura.component';
-import { CoreccionDescripcionFacturaComponent } from './coreccion-descripcion-factura/coreccion-descripcion-factura.component';
-import { DevolucionItemFacturaComponent } from './devolucion-item-factura/devolucion-item-factura.component';
-import { DescuentoItemFacturaComponent } from './descuento-item-factura/descuento-item-factura.component';
+import { AnulacionOperacionFacturaComponent } from './component/factura/anulacion-operacion-factura/anulacion-operacion-factura.component';
+import { AnulacionErrorRucFacturaComponent } from './component/factura/anulacion-error-ruc-factura/anulacion-error-ruc-factura.component';
+import { DescuentoTotalFacturaComponent } from './component/factura/descuento-total-factura/descuento-total-factura.component';
+import { DevolucionTotalFacturaComponent } from './component/factura/devolucion-total-factura/devolucion-total-factura.component';
+import { CoreccionDescripcionFacturaComponent } from './component/factura/coreccion-descripcion-factura/coreccion-descripcion-factura.component';
+import { DevolucionItemFacturaComponent } from './component/factura/devolucion-item-factura/devolucion-item-factura.component';
+import { DescuentoItemFacturaComponent } from './component/factura/descuento-item-factura/descuento-item-factura.component';
 @NgModule({
   declarations: [
     AppComponent,

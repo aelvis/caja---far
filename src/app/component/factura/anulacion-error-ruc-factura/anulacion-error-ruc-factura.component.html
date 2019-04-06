@@ -1,3 +1,132 @@
-<p>
-  anulacion-error-ruc-factura works!
-</p>
+<nav-component></nav-component>
+<br>
+<div class="container">
+	<div class="col-md-12">
+		<table class="table">
+		  <tbody>
+		    <tr>
+		      <th scope="col"  class="table-info" colspan="3"><div class="text-center">Emisión Notas de Crédito Electrónicas</div></th>
+		    </tr>
+		    <tr>
+		      <th scope="row">Tipo de Nota de Crédito</th>
+		      <td>:</td>
+		      <td>
+			    	<button  class="btn btn-primary" style="margin:2px 2px" (click)="anulacionOperacion()">Anulación de la Operación <span class="badge badge-light">1</span></button>
+			    	<button  class="btn btn-primary" style="margin:2px 2px" (click)="anulacionErrorRuc()">Anulación por Error en el Ruc <span class="badge badge-light">2</span></button>
+			    	<button  class="btn btn-primary" style="margin:2px 2px" (click)="descuentoGlobal()">Descuento Total <span class="badge badge-light">3</span></button>
+			    	<button  class="btn btn-primary" style="margin:2px 2px" (click)="devolucionTotal()">Devolución Total <span class="badge badge-light">4</span></button>
+			      	<button  class="btn btn-primary" style="margin:2px 2px" (click)="correcionErrorDescripcion()">Corrección por error en la Descripción <span class="badge badge-light">5</span></button>
+			      	<button  class="btn btn-primary" style="margin:2px 2px" (click)="devolucionItem()">Devolución por item <span class="badge badge-light">6</span></button>
+			      	<button  class="btn btn-primary" style="margin:2px 2px" (click)="descuentoItem()">Descuento por Item <span class="badge badge-light">7</span></button>
+			 </td>
+		    </tr>
+		    <tr *ngIf="anulacion_operacion == true">
+		      <th scope="row">Número de FE respecto de la cual se emite la Nota de Crédito</th>
+		      <td>E001</td>
+		      <td><input type="text" class="form-control"></td>
+		    </tr>
+		    <tr *ngIf="anulacion_operacion == true">
+		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
+		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+		    </tr>
+
+
+
+		    <tr *ngIf="anulacion_error_ruc == true">
+		    	<td>Número de Fe respecto de la cual se emite la Nota de Crédito</td>
+		    	<td>E001</td>
+		    	<td colspan="2"><input type="text" class="form-control"></td>
+		    </tr>
+		    <tr *ngIf="anulacion_error_ruc == true">
+		    	<td>Número de la Nueva Factura Electrónica</td>
+		    	<td>E001</td>
+		    	<td colspan="2"><input type="text" class="form-control"></td>
+		    </tr>
+
+
+
+
+		    <tr *ngIf="descuento_global == true">
+		      <th scope="row">Número de FE respecto de la cual se emite la Nota de Crédito</th>
+		      <td>E001</td>
+		      <td><input type="text" class="form-control"></td>
+		    </tr>
+		    <tr *ngIf="descuento_global == true">
+		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
+		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+		    </tr>
+		    <tr *ngIf="descuento_global == true">
+		    	<td>Descuento Global</td>
+		    	<td>:</td>
+		    	<td><input type="text" class="form-control"></td>
+		    </tr>
+		    <tr *ngIf="descuento_global == true">
+		    	<td>ISC</td>
+		    	<td>:</td>
+		    	<td><input type="text" class="form-control"></td>
+		    </tr>
+		    <tr *ngIf="descuento_global == true">
+		    	<td>IGV</td>
+		    	<td>:</td>
+		    	<td><input type="text" class="form-control"></td>
+		    </tr>
+
+
+		    <tr *ngIf="devolucion_total == true">
+		      <th scope="row">Número de FE respecto de la cual se emite la Nota de Crédito</th>
+		      <td>E001</td>
+		      <td><input type="text" class="form-control"></td>
+		    </tr>
+		    <tr *ngIf="devolucion_total == true">
+		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
+		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+		    </tr>
+
+
+		    <tr *ngIf="devolucion_total == true">
+		      <th scope="row">Número de FE respecto de la cual se emite la Nota de Crédito</th>
+		      <td>E001</td>
+		      <td><input type="text" class="form-control"></td>
+		    </tr>
+		    <tr *ngIf="devolucion_total == true">
+		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
+		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+		    </tr>
+
+
+			 <tr *ngIf="correcion_error_descripcion == true">
+		      <th scope="row">Número de FE respecto de la cual se emite la Nota de Crédito</th>
+		      <td>E001</td>
+		      <td><input type="text" class="form-control"></td>
+		    </tr>
+			<tr *ngIf="correcion_error_descripcion == true">
+		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
+		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+		    </tr>
+
+
+			 <tr *ngIf="devolucion_item == true">
+		      <th scope="row">Número de FE respecto de la cual se emite la Nota de Crédito</th>
+		      <td>E001</td>
+		      <td><input type="text" class="form-control"></td>
+		    </tr>
+			<tr *ngIf="devolucion_item == true">
+		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
+		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+		    </tr>
+
+
+			 <tr *ngIf="descuento_item == true">
+		      <th scope="row">Número de FE respecto de la cual se emite la Nota de Crédito</th>
+		      <td>E001</td>
+		      <td><input type="text" class="form-control"></td>
+		    </tr>
+			<tr *ngIf="descuento_item == true">
+		    	<td>Motivo o Sustento por el cual se emitira la nota de Credito</td>
+		    	<td colspan="2"><textarea name="" id="" cols="30" rows="2" class="form-control"></textarea></td>
+		    </tr>
+
+		  </tbody>
+		</table>
+	</div>
+</div>
