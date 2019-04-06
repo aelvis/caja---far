@@ -199,4 +199,23 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/guardarAnulacionOperacioneBdDevolucionTotal', params, {headers:headers});
 	}
+	obtenerIdPedidoBoletaService(id){
+		let params = new HttpParams();
+			params = params.append('codex', id);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/credito/obtenerIdPedidoBoleta', params, {headers:headers});
+	}
+	cambiarNombreItemService(id,nombre_co){
+		let params = new HttpParams();
+			params = params.append('codex', id);
+			params = params.append('nombre_co', nombre_co);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/credito/cambiarNombreItem', params, {headers:headers});
+	}
 }

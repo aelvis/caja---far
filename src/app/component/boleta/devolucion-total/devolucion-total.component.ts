@@ -3,7 +3,6 @@ import { UsuarioService } from '../../../services/usuario.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
   selector: 'app-devolucion-total',
   templateUrl: './devolucion-total.component.html',
