@@ -199,6 +199,17 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/guardarAnulacionOperacioneBdDevolucionTotal', params, {headers:headers});
 	}
+	guardarAnulacionOperacioneBdServiceDevolucionTotakDescripcion(ultima_boleta,descripcion_operacion_anulacion,buscar_anulacion_operacion){
+		let params = new HttpParams();
+			params = params.append('serie', ultima_boleta);
+			params = params.append('descripcion', descripcion_operacion_anulacion);
+			params = params.append('serie_ticket_cliente', buscar_anulacion_operacion);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/credito/guardarAnulacionOperacioneBdDevolucionTotalDescripcion', params, {headers:headers});
+	}
 	obtenerIdPedidoBoletaService(id){
 		let params = new HttpParams();
 			params = params.append('codex', id);
@@ -217,5 +228,38 @@ export class UsuarioService{
 			'Authorization': this.getToken()
 		});
 		return this._http.post(this.url+'/notas/credito/cambiarNombreItem', params, {headers:headers});
+	}
+	validarOperacionTicketDescrpicionService(codex){
+		let params = new HttpParams();
+			params = params.append('codex', codex);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/credito/validarOperacionTicketDescripcion', params, {headers:headers});
+	}
+	actualizarPedidoTickService(id_pedido,cantidad,precio,representacion,producto_sucursal){
+		let params = new HttpParams();
+			params = params.append('id_pedido', id_pedido);
+			params = params.append('cantidad', cantidad);
+			params = params.append('precio', precio);
+			params = params.append('representacion', representacion);
+			params = params.append('producto_sucursal', producto_sucursal);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/credito/actualizarPedidosClientePagar', params, {headers:headers});
+	}
+	guardarAnulacionOperacioneBdDevolucionTotalDescripcionCantidadService(ultima_boleta,descripcion_operacion_anulacion,buscar_anulacion_operacion){
+		let params = new HttpParams();
+			params = params.append('serie', ultima_boleta);
+			params = params.append('descripcion', descripcion_operacion_anulacion);
+			params = params.append('serie_ticket_cliente', buscar_anulacion_operacion);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/credito/guardarAnulacionOperacioneBdDevolucionTotalDescripcionCantidad', params, {headers:headers});
 	}
 }

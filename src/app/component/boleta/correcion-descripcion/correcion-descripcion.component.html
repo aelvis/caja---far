@@ -5,7 +5,7 @@
 				<tbody>
 				    <tr *ngIf="correcion_error_descripcion == true">
 				      <th scope="row">Número de BE respecto de la cual se emite la Nota de Crédito</th>
-				      <td scope="2"><input type="text" class="form-control" #verificar_dos_nuevo [(ngModel)]="buscar_anulacion_operacion" (keydown.enter)="buscarAnulacionOperactionRuc()"></td>
+				      <td scope="2"><input type="text" class="form-control" [(ngModel)]="buscar_anulacion_operacion" (keydown.enter)="buscarAnulacionOperactionRuc()"></td>
 				    </tr>
 				</tbody>
 			</table>
@@ -17,7 +17,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">Productos</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" (click)="cerrarModal()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -53,7 +53,7 @@
 			      <td *ngIf="pedi_bus.estado == '4'"><button class="btn btn-warning" (click)="actulizarItemOperacionController(pedi_bus.id)">Actualizar</button></td>
 			    </tr>
 			    <tr>
-			    	<td colspan="9"><button class="btn btn-warning" (click)="verificarAnulacionOperacionDos(verificar_dos_nuevo.value)">Verificar</button></td>
+			    	<td colspan="9"><button class="btn btn-warning" (click)="verificarAnulacionOperacionDos(ticket_anulacion_error_ruc?.serie)">Verificar</button></td>
 			    </tr>
 			    <tr *ngIf="correcion_error_descripcion_dos == true">
 			    	<td colspan="5">Motivo o Sustento por el cual se emitira la nota de Credito</td>

@@ -17,9 +17,13 @@ export class CorrecionDescripcionComponent implements OnInit {
 	public correcion_error_descripcion_dos:boolean;
 	public enviar_nueva_descripcion;
 	public data;
+	public imprimir_anulacion_error_ruc:boolean;
+	public ultima_boleta;
+	public descripcion_operacion_anulacion;
   	constructor(private toastr: ToastrService,private _usu: UsuarioService, private _router: Router, private route: ActivatedRoute) { 
    		this.correcion_error_descripcion = true;
    		this.correcion_error_descripcion_dos = false;
+   		this.imprimir_anulacion_error_ruc = false;
    	}
 	ngOnInit() {
 	}
@@ -31,6 +35,9 @@ export class CorrecionDescripcionComponent implements OnInit {
 	}
 	showWarning(titulo,mensaje) {
 	    this.toastr.warning(mensaje, titulo);
+	}
+	showInfo(titulo,mensaje){
+		this.toastr.info(mensaje, titulo);
 	}
   	buscarAnulacionOperactionRuc(){
 	  this.correcion_error_descripcion = true;
@@ -153,5 +160,74 @@ export class CorrecionDescripcionComponent implements OnInit {
 				this.showError("Alerta","Error de Internet");
 	  		}
 	  	);
+  	}
+	verificarAnulacionOperacionDos(verificar_dos_nuevo){
+		this._usu.validarOperacionTicketDescrpicionService(verificar_dos_nuevo).subscribe(
+		  	res => {
+		  		if(res["mensaje"].terminar){
+						localStorage.clear();
+						this._router.navigate(['/login']);
+		  		}else{
+		  			if(res["mensaje"].codigo == 'linda'){
+		  				this.showInfo("Alerta","Agregar Descripción a los Productos");
+						this.correcion_error_descripcion_dos = false;
+						this.imprimir_anulacion_error_ruc = false;
+		  			}else{
+			  			if(res["mensaje"].codigo == 'success'){
+			  				this.correcion_error_descripcion_dos = false;	
+			  				this.imprimir_anulacion_error_ruc = true;
+			  				this.ultima_boleta = res["mensaje"].ultima_boleta;
+			  			}else{
+			  				if(res["mensaje"].codigo == 'info'){
+			  					this.correcion_error_descripcion_dos = true;
+			  					this.imprimir_anulacion_error_ruc = false;
+			  					this.ultima_boleta = res["mensaje"].ultima_boleta;
+			  				}else{
+		  						if(res["mensaje"].codigo == 'warning'){
+									this.showWarning("Alerta","La Boleta no existe");
+									this.correcion_error_descripcion_dos = false;
+									this.imprimir_anulacion_error_ruc = false;
+			  					}else{
+			  						this.showError("Alerta","Aún no valida la Boleta");
+			  						this.correcion_error_descripcion_dos = false;
+			  						this.imprimir_anulacion_error_ruc = false;
+			  					}
+			  				}
+			  			}
+		  			}
+		  		}
+		  	},
+		  	error => {
+				this.showError("Alerta","Error de Internet");
+		  	}
+		);
+	}
+  	guardarAnulacionOperacioneBdController(){	
+	  this._usu.guardarAnulacionOperacioneBdServiceDevolucionTotakDescripcion(this.ultima_boleta,this.descripcion_operacion_anulacion,this.buscar_anulacion_operacion).subscribe(
+	  		res => {
+	  			if(res["mensaje"].terminar){
+					localStorage.clear();
+					this._router.navigate(['/login']);
+	  			}else{
+	  				if(res["mensaje"].codigo = 'success'){
+	  					this.showSuccess("Alerta","Se guardo correctamente");
+	  					this.correcion_error_descripcion = true;
+	  					this.correcion_error_descripcion_dos = false;
+	  					this.imprimir_anulacion_error_ruc = true;
+	  				}else{
+	  					this.showError("Alerta","Volver a Intentarlo - Error del internet");
+	  				}
+	  			}
+	  		},
+	  		error => {
+				this.showError("Alerta","Error de Internet");
+	  		}
+	  	);
+  	}
+  	cerrarModal(){
+  		$("#anulacionErrorRuc").modal("hide");
+  		this.correcion_error_descripcion = true;
+	  	this.correcion_error_descripcion_dos = false;
+	  	this.imprimir_anulacion_error_ruc = false;
   	}
 }
