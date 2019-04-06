@@ -24,6 +24,13 @@ import { AnuluacionErrorRucComponent } from './component/boleta/anuluacion-error
 import { DevolucionTotalComponent } from './component/boleta/devolucion-total/devolucion-total.component';
 import { CorrecionDescripcionComponent } from './component/boleta/correcion-descripcion/correcion-descripcion.component';
 import { DevolucionItemComponent } from './component/boleta/devolucion-item/devolucion-item.component';
+import { AnulacionOperacionFacturaComponent } from './anulacion-operacion-factura/anulacion-operacion-factura.component';
+import { AnulacionErrorRucFacturaComponent } from './anulacion-error-ruc-factura/anulacion-error-ruc-factura.component';
+import { DescuentoTotalFacturaComponent } from './descuento-total-factura/descuento-total-factura.component';
+import { DevolucionTotalFacturaComponent } from './devolucion-total-factura/devolucion-total-factura.component';
+import { CoreccionDescripcionFacturaComponent } from './coreccion-descripcion-factura/coreccion-descripcion-factura.component';
+import { DevolucionItemFacturaComponent } from './devolucion-item-factura/devolucion-item-factura.component';
+import { DescuentoItemFacturaComponent } from './descuento-item-factura/descuento-item-factura.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +45,14 @@ import { DevolucionItemComponent } from './component/boleta/devolucion-item/devo
     AnuluacionErrorRucComponent,
     DevolucionTotalComponent,
     CorrecionDescripcionComponent,
-    DevolucionItemComponent
+    DevolucionItemComponent,
+    AnulacionOperacionFacturaComponent,
+    AnulacionErrorRucFacturaComponent,
+    DescuentoTotalFacturaComponent,
+    DevolucionTotalFacturaComponent,
+    CoreccionDescripcionFacturaComponent,
+    DevolucionItemFacturaComponent,
+    DescuentoItemFacturaComponent
   ],
   imports: [
     BrowserModule,
