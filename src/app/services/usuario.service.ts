@@ -128,6 +128,7 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/tickets/ticket/actualizarTipoPago', params, {headers:headers});
 	}
+	//BOLETA
 	buscarAnulacionOperacionService(serie){
 		let params = new HttpParams();
 			params = params.append('serie', serie);
@@ -137,6 +138,17 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/buscarAnulacionOperaciones', params, {headers:headers});
 	}
+	//FACTURA
+	buscarAnulacionOperacionFacturaService(serie){
+		let params = new HttpParams();
+			params = params.append('serie', serie);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/factura/buscarAnulacionOperacionesFactura', params, {headers:headers});
+	}
+	//BOLETA
 	anularItemOperacionService(codex){
 		let params = new HttpParams();
 			params = params.append('codex', codex);
@@ -146,6 +158,17 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/anularItemOperacion', params, {headers:headers});
 	}
+	//FACTURA
+	anularItemOperacionFacturaService(codex){
+		let params = new HttpParams();
+			params = params.append('codex', codex);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/factura/anularItemOperacionFactura', params, {headers:headers});
+	}
+	//BOLETA
 	anularItemOperacionTicketService(codex){
 		let params = new HttpParams();
 			params = params.append('codex', codex);
@@ -155,6 +178,17 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/anularItemOperacionTicket', params, {headers:headers});
 	}
+	//FACTURA
+	anularItemOperacionTicketFacturaService(codex){
+		let params = new HttpParams();
+			params = params.append('codex', codex);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/factura/anularItemOperacionTicketFactura', params, {headers:headers});
+	}
+	//BOLETA
 	validarOperacionTicketService(codex){
 		let params = new HttpParams();
 			params = params.append('codex', codex);
@@ -164,6 +198,17 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/validarOperacionTicket', params, {headers:headers});
 	}
+	//FACTURA
+	validarOperacionTicketFacturaService(codex){
+		let params = new HttpParams();
+			params = params.append('codex', codex);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/factura/validarOperacionTicketFactura', params, {headers:headers});
+	}
+	//BOLETA
 	guardarAnulacionOperacioneBdService(ultima_boleta,descripcion_operacion_anulacion,buscar_anulacion_operacion){
 		let params = new HttpParams();
 			params = params.append('serie', ultima_boleta);
@@ -175,6 +220,19 @@ export class UsuarioService{
 			'Authorization': this.getToken()
 		});
 		return this._http.post(this.url+'/notas/credito/guardarAnulacionOperacioneBd', params, {headers:headers});
+	}
+	//FACTURA
+	guardarAnulacionOperacioneBdFacturaService(ultima_boleta,descripcion_operacion_anulacion,buscar_anulacion_operacion){
+		let params = new HttpParams();
+			params = params.append('serie', ultima_boleta);
+			params = params.append('descripcion', descripcion_operacion_anulacion);
+			params = params.append('tipo_nota', '1');
+			params = params.append('serie_ticket_cliente', buscar_anulacion_operacion);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/factura/guardarAnulacionOperacioneBdFactura', params, {headers:headers});
 	}
 	guardarAnulacionOperacioneBdServiceErrorRuc(ultima_boleta,utlima_boleta,buscar_anulacion_operacion){
 		let params = new HttpParams();
