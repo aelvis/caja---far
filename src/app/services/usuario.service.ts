@@ -234,6 +234,7 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/factura/guardarAnulacionOperacioneBdFactura', params, {headers:headers});
 	}
+	//BOLETA
 	guardarAnulacionOperacioneBdServiceErrorRuc(ultima_boleta,utlima_boleta,buscar_anulacion_operacion){
 		let params = new HttpParams();
 			params = params.append('serie', ultima_boleta);
@@ -245,6 +246,19 @@ export class UsuarioService{
 			'Authorization': this.getToken()
 		});
 		return this._http.post(this.url+'/notas/credito/guardarAnulacionOperacioneBdErrorRuc', params, {headers:headers});
+	}
+	//FACTURA
+	guardarAnulacionOperacioneBdServiceErrorRucFactura(ultima_boleta,utlima_boleta,buscar_anulacion_operacion){
+		let params = new HttpParams();
+			params = params.append('serie', ultima_boleta);
+			params = params.append('utlima_boleta', utlima_boleta);
+			params = params.append('tipo_nota', '2');
+			params = params.append('serie_ticket_cliente', buscar_anulacion_operacion);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/factura/guardarAnulacionOperacioneBdErrorRucFactura', params, {headers:headers});
 	}
 	guardarAnulacionOperacioneBdServiceDevolucionTotak(ultima_boleta,descripcion_operacion_anulacion,buscar_anulacion_operacion){
 		let params = new HttpParams();
