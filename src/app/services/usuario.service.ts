@@ -260,6 +260,7 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/factura/guardarAnulacionOperacioneBdErrorRucFactura', params, {headers:headers});
 	}
+	//BOLETA
 	guardarAnulacionOperacioneBdServiceDevolucionTotak(ultima_boleta,descripcion_operacion_anulacion,buscar_anulacion_operacion){
 		let params = new HttpParams();
 			params = params.append('serie', ultima_boleta);
@@ -271,6 +272,19 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/guardarAnulacionOperacioneBdDevolucionTotal', params, {headers:headers});
 	}
+	//FACTURA
+	guardarAnulacionOperacioneBdServiceDevolucionTotakFactura(ultima_boleta,descripcion_operacion_anulacion,buscar_anulacion_operacion){
+		let params = new HttpParams();
+			params = params.append('serie', ultima_boleta);
+			params = params.append('descripcion', descripcion_operacion_anulacion);
+			params = params.append('serie_ticket_cliente', buscar_anulacion_operacion);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/factura/guardarAnulacionOperacioneBdDevolucionTotalFactura', params, {headers:headers});
+	}
+	//BOLETA
 	guardarAnulacionOperacioneBdServiceDevolucionTotakDescripcion(ultima_boleta,descripcion_operacion_anulacion,buscar_anulacion_operacion){
 		let params = new HttpParams();
 			params = params.append('serie', ultima_boleta);
@@ -282,6 +296,7 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/guardarAnulacionOperacioneBdDevolucionTotalDescripcion', params, {headers:headers});
 	}
+	//BOLETA
 	obtenerIdPedidoBoletaService(id){
 		let params = new HttpParams();
 			params = params.append('codex', id);
@@ -291,6 +306,7 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/obtenerIdPedidoBoleta', params, {headers:headers});
 	}
+	//BOLETA
 	cambiarNombreItemService(id,nombre_co){
 		let params = new HttpParams();
 			params = params.append('codex', id);
@@ -301,6 +317,7 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/cambiarNombreItem', params, {headers:headers});
 	}
+	//BOLETA
 	validarOperacionTicketDescrpicionService(codex){
 		let params = new HttpParams();
 			params = params.append('codex', codex);
@@ -310,6 +327,7 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/validarOperacionTicketDescripcion', params, {headers:headers});
 	}
+	//BOLETA
 	actualizarPedidoTickService(id_pedido,cantidad,precio,representacion,producto_sucursal){
 		let params = new HttpParams();
 			params = params.append('id_pedido', id_pedido);
@@ -323,6 +341,7 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/actualizarPedidosClientePagar', params, {headers:headers});
 	}
+	//BOLETA
 	guardarAnulacionOperacioneBdDevolucionTotalDescripcionCantidadService(ultima_boleta,descripcion_operacion_anulacion,buscar_anulacion_operacion){
 		let params = new HttpParams();
 			params = params.append('serie', ultima_boleta);
