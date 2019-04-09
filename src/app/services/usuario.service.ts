@@ -142,6 +142,7 @@ export class UsuarioService{
 	buscarAnulacionOperacionFacturaService(serie){
 		let params = new HttpParams();
 			params = params.append('serie', serie);
+			/*params = params.append('idoperacion', operacion);*/
 		let headers = new HttpHeaders({
 			'Content-Type':'application/json',
 			'Authorization': this.getToken()

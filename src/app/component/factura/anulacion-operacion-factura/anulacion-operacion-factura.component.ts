@@ -32,6 +32,9 @@ export class AnulacionOperacionFacturaComponent implements OnInit {
 	showWarning(titulo,mensaje) {
 	    this.toastr.warning(mensaje, titulo);
 	}
+	showInfo(titulo,mensaje) {
+	    this.toastr.info(mensaje, titulo);
+	}
 	buscarAnulacionOperactionRuc(){
 		this.anulacion_operacion = true;
 		this._usu.buscarAnulacionOperacionFacturaService(this.buscar_anulacion_operacion).subscribe(
@@ -40,13 +43,17 @@ export class AnulacionOperacionFacturaComponent implements OnInit {
 						localStorage.clear();
 						this._router.navigate(['/login']);
 		  		}else{
-		  			if(res["mensaje"].ticket){
+		  			if(res["mensaje"].codigo == 'info'){
+		  					this.showInfo("Alerta","La factura ya fue usada");
+		  			}else{
+		  				if(res["mensaje"].ticket){
 		  					$("#anulacionOperaciones").modal("show");
 		  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
 		  					this.ticket_anulacion_operacion = res["mensaje"].ticket;
 		  					this.pedido_anulacion_operacion = res["mensaje"].pedido;
-		  			}else{
+		  				}else{
 		  					this.showError("Alerta","No se Encuentra La Factura");
+		  				}	
 		  			}
 		  		}
 		  	},
@@ -70,13 +77,16 @@ export class AnulacionOperacionFacturaComponent implements OnInit {
 										localStorage.clear();
 										this._router.navigate(['/login']);
 						  			}else{
-						  				if(res["mensaje"].ticket){
+						  				if(res["mensaje"].codigo == 'info'){
+						  					this.showInfo("Alerta","La factura ya fue usada");
+						  				}else{
+						  					if(res["mensaje"].ticket){
 						  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
 						  					this.pedido_anulacion_operacion = res["mensaje"].pedido;
 						  					this.ticket_anulacion_operacion = res["mensaje"].ticket;
-											
-						  				}else{
-						  					this.showError("Alerta","No se Encuentra La Boleta");
+							  				}else{
+							  					this.showError("Alerta","No se Encuentra La Factura");
+							  				}
 						  				}
 						  			}
 						  		},
@@ -108,13 +118,17 @@ export class AnulacionOperacionFacturaComponent implements OnInit {
 										localStorage.clear();
 										this._router.navigate(['/login']);
 						  			}else{
-						  				if(res["mensaje"].reiniciar_ticket){
-						  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
-						  					this.pedido_anulacion_operacion = res["mensaje"].pedido;
-						  					this.ticket_anulacion_operacion = res["mensaje"].ticket;
-
+						  				if(res["mensaje"].codigo == 'info'){
+						  					this.showInfo("Alerta","La factura ya fue usada");
 						  				}else{
-						  					this.showError("Alerta","No se Encuentra La Boleta");
+							  				if(res["mensaje"].reiniciar_ticket){
+							  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
+							  					this.pedido_anulacion_operacion = res["mensaje"].pedido;
+							  					this.ticket_anulacion_operacion = res["mensaje"].ticket;
+
+							  				}else{
+							  					this.showError("Alerta","No se Encuentra La Factura");
+							  				}
 						  				}
 						  			}
 						  		},

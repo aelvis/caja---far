@@ -47,13 +47,17 @@ export class CoreccionDescripcionFacturaComponent implements OnInit {
 					localStorage.clear();
 					this._router.navigate(['/login']);
 	  			}else{
-	  				if(res["mensaje"].ticket){
-	  					$("#anulacionErrorRuc").modal("show");
-	  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
-	  					this.ticket_anulacion_error_ruc = res["mensaje"].ticket;
-	  					this.pedido_anulacion_error_ruc = res["mensaje"].pedido;
+	  				if(res["mensaje"].codigo == 'info'){
+	  					this.showInfo("Alerta","La factura ya fue usada");
 	  				}else{
-	  					this.showError("Alerta","No se Encuentra La Factura");
+		  				if(res["mensaje"].ticket){
+		  					$("#anulacionErrorRuc").modal("show");
+		  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
+		  					this.ticket_anulacion_error_ruc = res["mensaje"].ticket;
+		  					this.pedido_anulacion_error_ruc = res["mensaje"].pedido;
+		  				}else{
+		  					this.showError("Alerta","No se Encuentra La Factura");
+		  				}
 	  				}
 	  			}
 	  		},
@@ -77,13 +81,16 @@ export class CoreccionDescripcionFacturaComponent implements OnInit {
 										localStorage.clear();
 										this._router.navigate(['/login']);
 						  			}else{
-						  				if(res["mensaje"].ticket){
-						  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
-						  					this.pedido_anulacion_error_ruc = res["mensaje"].pedido;
-						  					this.ticket_anulacion_error_ruc = res["mensaje"].ticket;
-											
+						  				if(res["mensaje"].codigo == 'info'){
+						  					this.showInfo("Alerta","La factura ya fue usada");
 						  				}else{
-						  					this.showError("Alerta","No se Encuentra La Factura");
+							  				if(res["mensaje"].ticket){
+							  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
+							  					this.pedido_anulacion_error_ruc = res["mensaje"].pedido;
+							  					this.ticket_anulacion_error_ruc = res["mensaje"].ticket;
+							  				}else{
+							  					this.showError("Alerta","No se Encuentra La Factura");
+							  				}
 						  				}
 						  			}
 						  		},
@@ -137,13 +144,17 @@ export class CoreccionDescripcionFacturaComponent implements OnInit {
 										localStorage.clear();
 										this._router.navigate(['/login']);
 						  			}else{
-						  				if(res["mensaje"].ticket){
-						  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
-						  					this.pedido_anulacion_error_ruc = res["mensaje"].pedido;
-						  					this.ticket_anulacion_error_ruc = res["mensaje"].ticket;
-											
+						  				if(res["mensaje"].codigo == 'info'){
+						  					this.showInfo("Alerta","La factura ya fue usada");
 						  				}else{
-						  					this.showError("Alerta","No se Encuentra La Factura");
+							  				if(res["mensaje"].ticket){
+							  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
+							  					this.pedido_anulacion_error_ruc = res["mensaje"].pedido;
+							  					this.ticket_anulacion_error_ruc = res["mensaje"].ticket;
+												
+							  				}else{
+							  					this.showError("Alerta","No se Encuentra La Factura");
+							  				}
 						  				}
 						  			}
 						  		},

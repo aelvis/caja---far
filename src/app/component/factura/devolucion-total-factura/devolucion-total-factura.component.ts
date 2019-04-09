@@ -34,6 +34,9 @@ export class DevolucionTotalFacturaComponent implements OnInit {
 	showWarning(titulo,mensaje) {
 	    this.toastr.warning(mensaje, titulo);
 	}
+	showInfo(titulo,mensaje) {
+	    this.toastr.info(mensaje, titulo);
+	}
   	buscarAnulacionOperactionRuc(){
 	  this.devolucion_total = true;
 	  this._usu.buscarAnulacionOperacionFacturaService(this.buscar_anulacion_operacion).subscribe(
@@ -42,13 +45,17 @@ export class DevolucionTotalFacturaComponent implements OnInit {
 					localStorage.clear();
 					this._router.navigate(['/login']);
 	  			}else{
-	  				if(res["mensaje"].ticket){
-	  					$("#anulacionErrorRuc").modal("show");
-	  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
-	  					this.ticket_anulacion_error_ruc = res["mensaje"].ticket;
-	  					this.pedido_anulacion_error_ruc = res["mensaje"].pedido;
+	  				if(res["mensaje"].codigo == 'info'){
+						this.showInfo("Alerta","La factura ya fue usada");
 	  				}else{
-	  					this.showError("Alerta","No se Encuentra La Factura");
+		  				if(res["mensaje"].ticket){
+		  					$("#anulacionErrorRuc").modal("show");
+		  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
+		  					this.ticket_anulacion_error_ruc = res["mensaje"].ticket;
+		  					this.pedido_anulacion_error_ruc = res["mensaje"].pedido;
+		  				}else{
+		  					this.showError("Alerta","No se Encuentra La Factura");
+		  				}
 	  				}
 	  			}
 	  		},
@@ -72,13 +79,16 @@ export class DevolucionTotalFacturaComponent implements OnInit {
 										localStorage.clear();
 										this._router.navigate(['/login']);
 						  			}else{
-						  				if(res["mensaje"].ticket){
-						  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
-						  					this.pedido_anulacion_error_ruc = res["mensaje"].pedido;
-						  					this.ticket_anulacion_error_ruc = res["mensaje"].ticket;
-											
+						  				if(res["mensaje"].codigo == 'info'){
+						  					this.showInfo("Alerta","La factura ya fue usada");
 						  				}else{
-						  					this.showError("Alerta","No se Encuentra La Factura");
+							  				if(res["mensaje"].ticket){
+							  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
+							  					this.pedido_anulacion_error_ruc = res["mensaje"].pedido;
+							  					this.ticket_anulacion_error_ruc = res["mensaje"].ticket;
+							  				}else{
+							  					this.showError("Alerta","No se Encuentra La Factura");
+							  				}
 						  				}
 						  			}
 						  		},
@@ -110,14 +120,17 @@ export class DevolucionTotalFacturaComponent implements OnInit {
 										localStorage.clear();
 										this._router.navigate(['/login']);
 						  			}else{
-						  				if(res["mensaje"].reiniciar_ticket){
-						  					this.pedido_anulacion_error_ruc = res["mensaje"].pedido;
-						  					this.ticket_anulacion_error_ruc = res["mensaje"].ticket;
-
+						  				if(res["mensaje"].codigo == 'info'){
+						  					this.showInfo("Alerta","La factura ya fue usada");
 						  				}else{
-						  					this.showError("Alerta","Faltan Actualizar Los Pedidos");
-						  					this.pedido_anulacion_error_ruc = res["mensaje"].pedido;
-						  					this.ticket_anulacion_error_ruc = res["mensaje"].ticket;
+							  				if(res["mensaje"].reiniciar_ticket){
+							  					this.pedido_anulacion_error_ruc = res["mensaje"].pedido;
+							  					this.ticket_anulacion_error_ruc = res["mensaje"].ticket;
+							  				}else{
+							  					this.showError("Alerta","Faltan Actualizar Los Pedidos");
+							  					this.pedido_anulacion_error_ruc = res["mensaje"].pedido;
+							  					this.ticket_anulacion_error_ruc = res["mensaje"].ticket;
+							  				}
 						  				}
 						  			}
 						  		},
