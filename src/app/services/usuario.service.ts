@@ -296,6 +296,18 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/guardarAnulacionOperacioneBdDevolucionTotalDescripcion', params, {headers:headers});
 	}
+	//FACTURA
+	guardarAnulacionOperacioneBdServiceDevolucionTotakDescripcionFactura(ultima_boleta,descripcion_operacion_anulacion,buscar_anulacion_operacion){
+		let params = new HttpParams();
+			params = params.append('serie', ultima_boleta);
+			params = params.append('descripcion', descripcion_operacion_anulacion);
+			params = params.append('serie_ticket_cliente', buscar_anulacion_operacion);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/factura/guardarAnulacionOperacioneBdDevolucionTotalDescripcionFactura', params, {headers:headers});
+	}
 	//BOLETA
 	obtenerIdPedidoBoletaService(id){
 		let params = new HttpParams();
@@ -305,6 +317,16 @@ export class UsuarioService{
 			'Authorization': this.getToken()
 		});
 		return this._http.post(this.url+'/notas/credito/obtenerIdPedidoBoleta', params, {headers:headers});
+	}
+	//FACTURA
+	obtenerIdPedidoBoletaServiceFactura(id){
+		let params = new HttpParams();
+			params = params.append('codex', id);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/factura/obtenerIdPedidoBoletaFactura', params, {headers:headers});
 	}
 	//BOLETA
 	cambiarNombreItemService(id,nombre_co){
@@ -317,6 +339,17 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/cambiarNombreItem', params, {headers:headers});
 	}
+	//FACTURA
+	cambiarNombreItemServiceFactura(id,nombre_co){
+		let params = new HttpParams();
+			params = params.append('codex', id);
+			params = params.append('nombre_co', nombre_co);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/factura/cambiarNombreItemFactura', params, {headers:headers});
+	}
 	//BOLETA
 	validarOperacionTicketDescrpicionService(codex){
 		let params = new HttpParams();
@@ -326,6 +359,16 @@ export class UsuarioService{
 			'Authorization': this.getToken()
 		});
 		return this._http.post(this.url+'/notas/credito/validarOperacionTicketDescripcion', params, {headers:headers});
+	}
+	//FACTURA
+	validarOperacionTicketDescrpicionServiceFactura(codex){
+		let params = new HttpParams();
+			params = params.append('codex', codex);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/factura/validarOperacionTicketDescripcionFactura', params, {headers:headers});
 	}
 	//BOLETA
 	actualizarPedidoTickService(id_pedido,cantidad,precio,representacion,producto_sucursal){
@@ -341,6 +384,20 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/credito/actualizarPedidosClientePagar', params, {headers:headers});
 	}
+	//FACTURA
+	actualizarPedidoTickServiceFactura(id_pedido,cantidad,precio,representacion,producto_sucursal){
+		let params = new HttpParams();
+			params = params.append('id_pedido', id_pedido);
+			params = params.append('cantidad', cantidad);
+			params = params.append('precio', precio);
+			params = params.append('representacion', representacion);
+			params = params.append('producto_sucursal', producto_sucursal);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/factura/actualizarPedidosClientePagarFactura', params, {headers:headers});
+	}
 	//BOLETA
 	guardarAnulacionOperacioneBdDevolucionTotalDescripcionCantidadService(ultima_boleta,descripcion_operacion_anulacion,buscar_anulacion_operacion){
 		let params = new HttpParams();
@@ -352,5 +409,17 @@ export class UsuarioService{
 			'Authorization': this.getToken()
 		});
 		return this._http.post(this.url+'/notas/credito/guardarAnulacionOperacioneBdDevolucionTotalDescripcionCantidad', params, {headers:headers});
+	}
+	//FACTURA
+	guardarAnulacionOperacioneBdDevolucionTotalDescripcionCantidadServiceFactura(ultima_boleta,descripcion_operacion_anulacion,buscar_anulacion_operacion){
+		let params = new HttpParams();
+			params = params.append('serie', ultima_boleta);
+			params = params.append('descripcion', descripcion_operacion_anulacion);
+			params = params.append('serie_ticket_cliente', buscar_anulacion_operacion);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/factura/guardarAnulacionOperacioneBdDevolucionTotalDescripcionCantidadFactura', params, {headers:headers});
 	}
 }
