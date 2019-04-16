@@ -18,6 +18,7 @@ public anulacion_operacion_dos;
 public imprimir_anulacion_operacion_dos;
 public ultima_boleta;
 public descripcion_operacion_anulacion;
+public datos_opcionales;
   constructor(private toastr: ToastrService,private _usu: UsuarioService, private _router: Router, private route: ActivatedRoute) { 
 		this.anulacion_operacion = true;
   }
@@ -144,6 +145,7 @@ public descripcion_operacion_anulacion;
 	  				this.anulacion_operacion_dos = false;	
 	  				this.imprimir_anulacion_operacion_dos = true;
 	  				this.ultima_boleta = res["mensaje"].ultima_boleta;
+	  				this.datos_opcionales = res["mensaje"].normal;
 	  			}else{
 	  				if(res["mensaje"].codigo == 'info'){
 	  					this.anulacion_operacion_dos = true;
@@ -180,6 +182,27 @@ public descripcion_operacion_anulacion;
 	  					this.anulacion_operacion = true;
 	  					this.anulacion_operacion_dos = false;
 	  					this.imprimir_anulacion_operacion_dos = true;
+	  				}else{
+	  					this.showError("Alerta","Volver a Intentarlo - Error del internet");
+	  				}
+	  			}
+	  		},
+	  		error => {
+				this.showError("Alerta","Error de Internet");
+	  		}
+	  	);
+  	}
+  	imp(){
+ 	  	this._usu.imprimirGenerarFacturaNotaOBleta(this.buscar_anulacion_operacion).subscribe(
+	  		res => {
+	  			if(res["mensaje"].terminar){
+					localStorage.clear();
+					this._router.navigate(['/login']);
+	  			}else{
+	  				if(res["mensaje"].codigo = 'success'){
+	  					this.showSuccess("Alerta","Se generó Correctamente");
+	  					this.verificarAnulacionOperacionDos(this.buscar_anulacion_operacion);
+
 	  				}else{
 	  					this.showError("Alerta","Volver a Intentarlo - Error del internet");
 	  				}

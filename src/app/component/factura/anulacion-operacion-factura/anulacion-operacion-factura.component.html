@@ -14,7 +14,8 @@
 				    </tr>
 				    <tr>
 				    	<td colspan="2"  *ngIf="anulacion_operacion_dos == true"><button class="btn btn-danger" (click)="guardarAnulacionOperacioneBdController()">Guardar</button></td>
-				    	<td *ngIf="imprimir_anulacion_operacion_dos == true"><button class="btn btn-success">Imprimir</button></td>
+				    	<td *ngIf="imprimir_anulacion_operacion_dos == true && datos_opcionales.url == null"><button class="btn btn-success" (click)="imp()">Mandar Sunat</button></td>
+				    	<td *ngIf="imprimir_anulacion_operacion_dos == true && datos_opcionales.url != null"><a class="btn btn-success" target="_blank" href="{{datos_opcionales.url}}">Imprimir</a></td>
 				    </tr>
 				</tbody>
 			</table>

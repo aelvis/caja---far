@@ -423,4 +423,31 @@ export class UsuarioService{
 		});
 		return this._http.post(this.url+'/notas/factura/guardarAnulacionOperacioneBdDevolucionTotalDescripcionCantidadFactura', params, {headers:headers});
 	}
+	imprimirGenerarFacturaOBleta(id){
+		let params = new HttpParams();
+			params = params.append('serie', id);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/tickets/ticket/imprimirGenerarFacturaOBleta', params, {headers:headers});
+	}
+	imprimirGenerarFacturaNotaOBleta(id){
+		let params = new HttpParams();
+			params = params.append('serie', id);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/credito/imprimirNotasNube', params, {headers:headers});
+	}
+	imprimirGenerarFacturaNotaOBletaFactura(id){
+		let params = new HttpParams();
+			params = params.append('serie', id);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': this.getToken()
+		});
+		return this._http.post(this.url+'/notas/factura/imprimirNotasNube', params, {headers:headers});
+	}
 }

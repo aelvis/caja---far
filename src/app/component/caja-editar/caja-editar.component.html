@@ -9,18 +9,20 @@
 			<h3 class="text-center" *ngIf="boleta_factura == 'b'">GENERAR BOLETA B{{numero_boleta_factura+1}}</h3><br>
 			<h3 class="text-center" *ngIf="boleta_factura == 'f'">GENERAR FACTURA F{{numero_boleta_factura+1}}</h3><br>
 		</div>
-		<div class="col-md-12" *ngIf="tipo_pago?.estado_id == 1">
-			<h3 class="text-center">{{tipo_pago?.serie}}</h3><br>
+		<div class="col-md-12" *ngIf="tipo_pago?.estado_id == 1" style=" display: flex;justify-content: center;align-items: center;">
+			<h3>{{tipo_pago?.serie}}</h3>
+			<button *ngIf="tipo_pago?.url == null"class="btn btn-warning" (click)="imprimirFacturaOBoleta()">Imprimir</button>
+			<div *ngIf="tipo_pago?.url != null"><a class="btn btn-success" href="{{tipo_pago?.url}}" target="_blank">Imprimir</a></div>
 		</div>
 		<div class="col-md-6" style="display: flex;justify-content: center;"  *ngIf="tipo_pago?.estado_id == 3">
 			<button class="btn btn-info btn-block font-weight-normal text-center" style="color: white;" (click)="mandarCaja()">VERIFICAR</button><br><br><br>
 		</div>
 		<div class="col-md-6" style="display: flex;justify-content: center;" *ngIf="imprimir == 1 && tipo_pago?.estado_id == 3 && boleta_factura == 'b'">
-			<input type="hidden" #obtenerBoleta value="B{{numero_boleta_factura+1}}">
+			<input type="hidden" #obtenerBoleta value="BBB1{{numero_boleta_factura+1}}">
 			<button class="btn btn-danger btn-block font-weight-normal text-center" style="color: white;" (click)="imprimirFac(obtenerBoleta.value)">GENERAR</button><br><br><br>
 		</div>
 		<div class="col-md-6" style="display: flex;justify-content: center;" *ngIf="imprimir == 1 && tipo_pago?.estado_id == 3 && boleta_factura == 'f'">
-			<input type="hidden" #obtenerFactura value="F{{numero_boleta_factura+1}}">
+			<input type="hidden" #obtenerFactura value="FFF1{{numero_boleta_factura+1}}">
 			<button class="btn btn-danger btn-block font-weight-normal text-center" style="color: white;" (click)="imprimirFac(obtenerFactura.value)">GENERAR</button><br><br><br>
 		</div>
 		<div class="col-md-12">

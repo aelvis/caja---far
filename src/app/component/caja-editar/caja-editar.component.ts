@@ -274,5 +274,29 @@ export class CajaEditarComponent implements OnInit {
             this.tipo_pago_cargar = true;
 		  		}
 		  	);
-  	}
+  }
+  imprimirFacturaOBoleta(){
+    this.introduccion = false;
+    this._usu.imprimirGenerarFacturaOBleta(this.id_pedido).subscribe(
+        res => {
+          if(res["mensaje"].terminar){
+          localStorage.clear();
+          this._router.navigate(['/login']);
+          }else{
+            if(res["mensaje"].codigo == 'success'){
+              this.showSuccess("Alerta", res["mensaje"].msg);
+              this.obtenerPedido();
+              this.introduccion = true;
+            }else{
+              this.showError("Alerta", res["mensaje"].msg);
+              this.introduccion = true;
+            }
+          }
+        },
+        error => {
+          this.showError("Alerta","Error de Internet");
+          this.introduccion = true;
+        }
+      );
+  }
 }
