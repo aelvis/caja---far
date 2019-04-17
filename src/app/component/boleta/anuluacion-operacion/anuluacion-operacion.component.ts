@@ -76,7 +76,6 @@ public datos_opcionales;
 					  					this.reiniciar_ticket = res["mensaje"].reiniciar_ticket;
 					  					this.pedido_anulacion_operacion = res["mensaje"].pedido;
 					  					this.ticket_anulacion_operacion = res["mensaje"].ticket;
-										
 					  				}else{
 					  					this.showError("Alerta","No se Encuentra La Boleta");
 					  				}
