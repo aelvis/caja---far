@@ -96,8 +96,8 @@
 			<div class="row" *ngIf="tipo_pago_cargar == false">
 				<div class="loader" id="loader">Loading...</div>
 			</div>
-			<h1 class="h2 mb-3 font-weight-normal text-center" style="color: red"  *ngIf="tipo_pago?.estado_id == 3"><u>Buscar Producto</u></h1>
-			<div class="row"  *ngIf="tipo_pago?.estado_id == 3">
+			<h1 class="h2 mb-3 font-weight-normal text-center" style="color: red"  *ngIf="imprimir != 1 && tipo_pago?.estado_id == 3"><u>Buscar Producto</u></h1>
+			<div class="row"  *ngIf="imprimir != 1 && tipo_pago?.estado_id == 3">
 				<div class="col-md-6">
 				  <div class="form-group">
 				    <label for="inputPassword2" class="sr-only">Nombre</label>
@@ -122,7 +122,6 @@
 			<table class="table">
 			  <thead class="thead-dark">
 			    <tr>
-			      <th scope="col">#</th>
 			      <th scope="col">Nombre</th>
 			      <th scope="col">Precio</th>
 			      <th scope="col">Cantidad</th>
@@ -133,13 +132,12 @@
 			  </thead>
 			  <tbody>
 			    <tr *ngFor="let pedi_bus of pedido_buscado; index as i">
-			      <th scope="row">{{i+1}}</th>
-			      <td>{{pedi_bus.nombre}}</td>
-			      <td>S/. {{pedi_bus.precio}}</td>
-			      <td><input type="text" class="form-control" #cantidad_agregar placeholder="Cantidad" (keyup.enter)="agregarPedidoAlCarrito(pedi_bus.id_producto_unidad,cantidad_agregar.value, pedi_bus.representacion, pedi_bus.precio, pedi_bus.producto_id,pedi_bus.id_producto_sucursal)"></td>
-			      <td>{{pedi_bus.nombre_unidad}}</td>
-			      <td>{{pedi_bus.representacion}}</td>
-			      <td>{{pedi_bus.stock}}</td>
+			      <td *ngIf="pedi_bus.estado_producto == '1' && pedi_bus.estado_producto_unidad == '1' && pedi_bus.estado_unidad == '1' && pedi_bus.estado_sucursal == '1'">{{pedi_bus.nombre}}</td>
+			      <td *ngIf="pedi_bus.estado_producto == '1' && pedi_bus.estado_producto_unidad == '1' && pedi_bus.estado_unidad == '1' && pedi_bus.estado_sucursal == '1'">S/. {{pedi_bus.precio}}</td>
+			      <td *ngIf="pedi_bus.estado_producto == '1' && pedi_bus.estado_producto_unidad == '1' && pedi_bus.estado_unidad == '1' && pedi_bus.estado_sucursal == '1'"><input type="text" class="form-control" #cantidad_agregar placeholder="Cantidad" (keyup.enter)="agregarPedidoAlCarrito(pedi_bus.id_producto_unidad,cantidad_agregar.value, pedi_bus.representacion, pedi_bus.precio, pedi_bus.producto_id,pedi_bus.id_producto_sucursal)"></td>
+			      <td *ngIf="pedi_bus.estado_producto == '1' && pedi_bus.estado_producto_unidad == '1' && pedi_bus.estado_unidad == '1' && pedi_bus.estado_sucursal == '1'">{{pedi_bus.nombre_unidad}}</td>
+			      <td *ngIf="pedi_bus.estado_producto == '1' && pedi_bus.estado_producto_unidad == '1' && pedi_bus.estado_unidad == '1' && pedi_bus.estado_sucursal == '1'">{{pedi_bus.representacion}}</td>
+			      <td *ngIf="pedi_bus.estado_producto == '1' && pedi_bus.estado_producto_unidad == '1' && pedi_bus.estado_unidad == '1' && pedi_bus.estado_sucursal == '1'">{{pedi_bus.stock}}</td>
 			    </tr>
 			  </tbody>
 			</table>

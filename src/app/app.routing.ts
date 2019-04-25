@@ -13,7 +13,7 @@ const appRoutes: Routes = [
 	{path: '', component: LoginComponent},
 	{path: '', redirectTo: 'login', pathMatch: 'full'},
 	{path: 'login', component: LoginComponent},
-	{path: 'inicio', component: InicioComponent, canActivate: [AdminGuard]},
+	{path: 'inicio', component: CajaComponent, canActivate: [AdminGuard]},
 	{path: 'caja', component: CajaComponent, canActivate: [AdminGuard]},
 	{path: 'caja-editar/:id_ticket', component: CajaEditarComponent, canActivate: [AdminGuard]},
 	{path: 'nota-credito-boleta', component: NotaCreditoBoletaComponent, canActivate: [AdminGuard]},

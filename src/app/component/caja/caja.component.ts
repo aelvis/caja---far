@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CajaComponent implements OnInit {
   public ticket;
   public inicio:boolean;
+  public total;
   constructor(private toastr: ToastrService,private _usu: UsuarioService, private _router: Router) {
     this.inicio = true;
   }
@@ -32,6 +33,7 @@ export class CajaComponent implements OnInit {
   			}else{
   				if(res["mensaje"].ticket){
   					this.ticket = res["mensaje"].ticket;
+            this.total = res["mensaje"].suma_total;
             this.inicio = true;
   				}else{
   					this.showError("Alerta","No se Encuentran Productos");
